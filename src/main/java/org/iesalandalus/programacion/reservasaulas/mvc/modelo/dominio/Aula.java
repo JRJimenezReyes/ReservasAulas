@@ -4,10 +4,16 @@ import java.util.Objects;
 
 public class Aula {
 	
-	private String nombre;
+	private static final float PUNTOS_POR_PUESTO = 0.5f;
+	private static final int MIN_PUESTOS = 10;
+	private static final int MAX_PUESTOS = 100;
 	
-	public Aula(String nombre) {
+	private String nombre;
+	private int puestos;
+	
+	public Aula(String nombre, int puestos) {
 		setNombre(nombre);
+		setPuestos(puestos);
 	}
 	
 	public Aula(Aula aula) {
@@ -15,6 +21,7 @@ public class Aula {
 			throw new NullPointerException("ERROR: No se puede copiar un aula nula.");
 		}
 		setNombre(aula.getNombre());
+		setPuestos(aula.getPuestos());
 	}
 	
 	private void setNombre(String nombre) {
@@ -29,6 +36,21 @@ public class Aula {
 	
 	public String getNombre() {
 		return nombre;
+	}
+	
+	public void setPuestos(int puestos) {
+		if (puestos < MIN_PUESTOS || puestos > MAX_PUESTOS) {
+			throw new IllegalArgumentException("ERROR: El número de puestos no es correcto.");
+		}
+		this.puestos = puestos;
+	}
+	
+	public int getPuestos() {
+		return puestos;
+	}
+	
+	public float getPuntos() {
+		return puestos * PUNTOS_POR_PUESTO;
 	}
 
 	@Override
@@ -50,7 +72,7 @@ public class Aula {
 
 	@Override
 	public String toString() {
-		return String.format("nombre=%s", nombre);
+		return String.format("nombre=%s, puestos=%d", nombre, puestos);
 	}
 
 }

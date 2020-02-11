@@ -61,7 +61,9 @@ public class Consola {
 	public static Aula leerAula() {
 		System.out.print("Introduce el nombre del aula: ");
 		String nombre = Entrada.cadena();
-		return new Aula(nombre);
+		System.out.print("Introduce el número de puestos del aula: ");
+		int puestos = Entrada.entero();
+		return new Aula(nombre, puestos);
 	}
 	
 	public static Permanencia leerPermanencia() {
@@ -72,7 +74,7 @@ public class Consola {
 		LocalDate dia = null;
 		String cadenaFormato = "dd/MM/yyyy";
 		DateTimeFormatter formatoDia = DateTimeFormatter.ofPattern(cadenaFormato);
-		System.out.printf("Introduce el día (%s): ", formatoDia);
+		System.out.printf("Introduce el día (%s): ", cadenaFormato);
 		String diaLeido = Entrada.cadena();
 		try {
 			dia = LocalDate.parse(diaLeido, formatoDia);

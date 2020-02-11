@@ -61,9 +61,9 @@ public class ReservasTest {
 		profesor1 = Profesor.getProfesorFicticio("bob@gmail.com");
 		profesor2 = Profesor.getProfesorFicticio("calamardo@gmail.com");
 		profesor3 = Profesor.getProfesorFicticio("patricio@gmail.com");
-		aula1 = new Aula("Aula 1");
-		aula2 = new Aula("Aula 2");
-		aula3 = new Aula("Aula 3");
+		aula1 = new Aula("Aula 1", 10);
+		aula2 = new Aula("Aula 2", 20);
+		aula3 = new Aula("Aula 3", 30);
 		permanencia1 = new Permanencia(LocalDate.now(), Tramo.MANANA);
 		permanencia2 = new Permanencia(LocalDate.now(), Tramo.TARDE);
 		permanencia3 = new Permanencia(LocalDate.now().plusDays(1), Tramo.MANANA);

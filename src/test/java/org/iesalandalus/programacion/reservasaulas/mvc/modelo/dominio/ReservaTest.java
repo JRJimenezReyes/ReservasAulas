@@ -37,7 +37,7 @@ public class ReservaTest {
 	@BeforeClass
 	public static void asignarValoresAtributos() {
 		profesor = Profesor.getProfesorFicticio("bob@gmail.com");
-		aula = new Aula("Aula 1");
+		aula = new Aula("Aula 1", 30);
 		permanencia = new Permanencia(LocalDate.now(), Tramo.MANANA);
 	}
 

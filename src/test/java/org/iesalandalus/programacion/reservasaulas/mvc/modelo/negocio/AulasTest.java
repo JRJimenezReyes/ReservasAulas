@@ -38,9 +38,9 @@ public class AulasTest {
 	
 	@BeforeClass
 	public static void asignarValoresAtributos() {
-		aula1 = new Aula("Aula 1");
-		aula2 = new Aula("Aula 2");
-		aula3 = new Aula("Aula 3");
+		aula1 = new Aula("Aula 1", 10);
+		aula2 = new Aula("Aula 2", 20);
+		aula3 = new Aula("Aula 3", 30);
 		aulaRepetida = new Aula(aula1);
 	}
 	
