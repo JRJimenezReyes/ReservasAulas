@@ -29,6 +29,10 @@ public class ReservasTest {
 	private static final String ERROR_BORRAR_RESERVA_NULA = "ERROR: No se puede borrar una reserva nula.";
 	private static final String ERROR_BUSCAR_RESERVA_NULA = "ERROR: No se puede buscar una reserva nula.";
 	private static final String ERROR_RESERVA_EXISTE = "ERROR: Ya existe una reserva igual.";
+	private static final String ERROR_RESERVA_PERMANENCIA_INCOMPATIBLE = "ERROR: Ya se ha realizado una reserva de otro tipo de permanencia para este día.";
+	private static final String ERROR_REALIZAR_RESERVA_NO_MES_SIGUIENTE = "ERROR: Sólo se pueden hacer reservas para el mes que viene o posteriores.";
+	private static final String ERROR_ANULAR_RESERVA_NO_MES_SIGUIENTE = "ERROR: Sólo se pueden anular reservas para el mes que viene o posteriores.";
+	private static final String ERROR_RESERVA_EXCEDE_PUNTOS = "ERROR: Esta reserva excede los puntos máximos por mes para dicho profesor.";
 	private static final String ERROR_RESERVA_BORRAR_NO_EXISTE = "ERROR: No existe ninguna reserva igual.";
 	private static final String ERROR_PROFESOR_NULO = "ERROR: El profesor no puede ser nulo.";
 	private static final String ERROR_AULA_NULA = "ERROR: El aula no puede ser nula.";
@@ -66,6 +70,8 @@ public class ReservasTest {
 	private static Reserva reserva9;
 	private static Reserva reservaRepetidaTramo;
 	private static Reserva reservaRepetidaHora;
+	private static Reserva reservaTramo;
+	private static Reserva reservaHora;
 	
 	@BeforeClass
 	public static void asignarValoresAtributos() {
@@ -74,13 +80,13 @@ public class ReservasTest {
 		profesor3 = Profesor.getProfesorFicticio("patricio@gmail.com");
 		aula1 = new Aula("Aula 1", 10);
 		aula2 = new Aula("Aula 2", 20);
-		aula3 = new Aula("Aula 3", 30);
-		permanencia1 = new PermanenciaPorTramo(LocalDate.now(), Tramo.MANANA);
-		permanencia2 = new PermanenciaPorTramo(LocalDate.now(), Tramo.TARDE);
-		permanencia3 = new PermanenciaPorTramo(LocalDate.now().plusDays(1), Tramo.MANANA);
-		permanencia4 = new PermanenciaPorHora(LocalDate.now().plusDays(2), LocalTime.of(10, 0));
-		permanencia5 = new PermanenciaPorHora(LocalDate.now().plusDays(2), LocalTime.of(11, 0));
-		permanencia6 = new PermanenciaPorHora(LocalDate.now().plusDays(2), LocalTime.of(12, 0));
+		aula3 = new Aula("Aula 3", 50);
+		permanencia1 = new PermanenciaPorTramo(LocalDate.now().plusMonths(1), Tramo.MANANA);
+		permanencia2 = new PermanenciaPorTramo(LocalDate.now().plusMonths(1), Tramo.TARDE);
+		permanencia3 = new PermanenciaPorTramo(LocalDate.now().plusMonths(1).plusDays(1), Tramo.MANANA);
+		permanencia4 = new PermanenciaPorHora(LocalDate.now().plusMonths(1).plusDays(2), LocalTime.of(10, 0));
+		permanencia5 = new PermanenciaPorHora(LocalDate.now().plusMonths(1).plusDays(2), LocalTime.of(11, 0));
+		permanencia6 = new PermanenciaPorHora(LocalDate.now().plusMonths(1).plusDays(2), LocalTime.of(12, 0));
 		reserva1 = new Reserva(profesor1, aula1, permanencia3);
 		reserva2 = new Reserva(profesor1, aula2, permanencia3);
 		reserva3 = new Reserva(profesor3, aula3, permanencia3);
@@ -92,6 +98,8 @@ public class ReservasTest {
 		reserva9 = new Reserva(profesor2, aula1, permanencia4);
 		reservaRepetidaTramo = new Reserva(profesor1, aula2, permanencia3);
 		reservaRepetidaHora = new Reserva(profesor1, aula2, permanencia4);
+		reservaTramo = new Reserva(profesor1, aula2, new PermanenciaPorTramo(LocalDate.now().plusMonths(1), Tramo.MANANA));
+		reservaHora = new Reserva(profesor1, aula2, new PermanenciaPorHora(LocalDate.now().plusMonths(1), LocalTime.of(12, 0)));
 	}
 	
 	@Test
@@ -387,7 +395,97 @@ public class ReservasTest {
 	}
 	
 	@Test
-	public void borrarReservaExistenteBorraReservaCorrectamente() throws OperationNotSupportedException {
+	public void insertarReservaMismoDiaDiferenteTipoPermanenciaLanzaExcepcion() {
+		Reservas reservas = new Reservas();
+		try {
+			reservas.insertar(reservaTramo);
+			reservas.insertar(reservaHora);
+			fail(OPERACION_NO_PERMITIDA);
+		} catch (OperationNotSupportedException e) {
+			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_RESERVA_PERMANENCIA_INCOMPATIBLE));
+			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(1));
+		} catch (Exception e) {
+			fail(TIPO_NO_CORRECTO);
+		}
+		reservas = new Reservas();
+		try {
+			reservas.insertar(reservaHora);
+			reservas.insertar(reservaTramo);
+			fail(OPERACION_NO_PERMITIDA);
+		} catch (OperationNotSupportedException e) {
+			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_RESERVA_PERMANENCIA_INCOMPATIBLE));
+			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(1));
+		} catch (Exception e) {
+			fail(TIPO_NO_CORRECTO);
+		}
+	}
+	
+	@Test
+	public void insertarReservaNoMesQueVieneLanzaExcepcion() {
+		Reservas reservas = new Reservas();
+		try {
+			reservas.insertar(new Reserva(profesor1, aula1, new PermanenciaPorTramo(LocalDate.now(), Tramo.MANANA)));
+			fail(OPERACION_NO_PERMITIDA);
+		} catch (OperationNotSupportedException e) {
+			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_REALIZAR_RESERVA_NO_MES_SIGUIENTE));
+			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(0));
+		} catch (Exception e) {
+			fail(TIPO_NO_CORRECTO);
+		}
+		try {
+			LocalDate ultimoDiaMes = LocalDate.now().plusMonths(1).plusDays(-LocalDate.now().plusMonths(1).getDayOfMonth());
+			reservas.insertar(new Reserva(profesor1, aula1, new PermanenciaPorTramo(ultimoDiaMes, Tramo.MANANA)));
+			fail(OPERACION_NO_PERMITIDA);
+		} catch (OperationNotSupportedException e) {
+			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_REALIZAR_RESERVA_NO_MES_SIGUIENTE));
+			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(0));
+		} catch (Exception e) {
+			fail(TIPO_NO_CORRECTO);
+		}
+		reservas = new Reservas();
+		try {
+			reservas.insertar(new Reserva(profesor1, aula1, new PermanenciaPorHora(LocalDate.now(), LocalTime.of(12, 0))));
+			fail(OPERACION_NO_PERMITIDA);
+		} catch (OperationNotSupportedException e) {
+			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_REALIZAR_RESERVA_NO_MES_SIGUIENTE));
+			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(0));
+		} catch (Exception e) {
+			fail(TIPO_NO_CORRECTO);
+		}
+		try {
+			LocalDate ultimoDiaMes = LocalDate.now().plusMonths(1).plusDays(-LocalDate.now().plusMonths(1).getDayOfMonth());
+			reservas.insertar(new Reserva(profesor1, aula1, new PermanenciaPorHora(ultimoDiaMes, LocalTime.of(12, 0))));
+			fail(OPERACION_NO_PERMITIDA);
+		} catch (OperationNotSupportedException e) {
+			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_REALIZAR_RESERVA_NO_MES_SIGUIENTE));
+			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(0));
+		} catch (Exception e) {
+			fail(TIPO_NO_CORRECTO);
+		}
+	}
+	
+	@Test
+	public void insertarReservaPuntosSobrepasadosProfesorLanzaExcepcion() {
+		Reservas reservas = new Reservas();
+		try {
+			reservas.insertar(new Reserva(profesor1, aula3, permanencia1));
+			reservas.insertar(new Reserva(profesor1, aula3, permanencia2));
+			reservas.insertar(new Reserva(profesor1, aula3, permanencia3));
+			reservas.insertar(new Reserva(profesor1, aula3, permanencia4));
+			reservas.insertar(new Reserva(profesor1, aula3, permanencia5));
+			reservas.insertar(new Reserva(profesor1, aula3, permanencia6));
+			reservas.insertar(new Reserva(profesor1, aula1, permanencia2));
+			fail(OPERACION_NO_PERMITIDA);
+		} catch (OperationNotSupportedException e) {
+			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_RESERVA_EXCEDE_PUNTOS));
+			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(6));
+		} catch (Exception e) {
+			fail(TIPO_NO_CORRECTO);
+		}
+	}
+	
+	@Test
+	public void borrarReservaExistenteBorraReservaCorrectamente() {
 		Reservas reservas = new Reservas();
 		try {
 			reservas.insertar(reserva1);
@@ -460,6 +558,49 @@ public class ReservasTest {
 		}
 	}
 	
+	@Test
+	public void borrarReservaNoMesQueVieneLanzaExcepcion() {
+		Reservas reservas = new Reservas();
+		try {
+			reservas.borrar(new Reserva(profesor1, aula1, new PermanenciaPorTramo(LocalDate.now(), Tramo.MANANA)));
+			fail(OPERACION_NO_PERMITIDA);
+		} catch (OperationNotSupportedException e) {
+			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_ANULAR_RESERVA_NO_MES_SIGUIENTE));
+			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(0));
+		} catch (Exception e) {
+			fail(TIPO_NO_CORRECTO);
+		}
+		try {
+			LocalDate ultimoDiaMes = LocalDate.now().plusMonths(1).plusDays(-LocalDate.now().plusMonths(1).getDayOfMonth());
+			reservas.borrar(new Reserva(profesor1, aula1, new PermanenciaPorTramo(ultimoDiaMes, Tramo.MANANA)));
+			fail(OPERACION_NO_PERMITIDA);
+		} catch (OperationNotSupportedException e) {
+			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_ANULAR_RESERVA_NO_MES_SIGUIENTE));
+			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(0));
+		} catch (Exception e) {
+			fail(TIPO_NO_CORRECTO);
+		}
+		reservas = new Reservas();
+		try {
+			reservas.borrar(new Reserva(profesor1, aula1, new PermanenciaPorHora(LocalDate.now(), LocalTime.of(12, 0))));
+			fail(OPERACION_NO_PERMITIDA);
+		} catch (OperationNotSupportedException e) {
+			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_ANULAR_RESERVA_NO_MES_SIGUIENTE));
+			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(0));
+		} catch (Exception e) {
+			fail(TIPO_NO_CORRECTO);
+		}
+		try {
+			LocalDate ultimoDiaMes = LocalDate.now().plusMonths(1).plusDays(-LocalDate.now().plusMonths(1).getDayOfMonth());
+			reservas.borrar(new Reserva(profesor1, aula1, new PermanenciaPorHora(ultimoDiaMes, LocalTime.of(12, 0))));
+			fail(OPERACION_NO_PERMITIDA);
+		} catch (OperationNotSupportedException e) {
+			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_ANULAR_RESERVA_NO_MES_SIGUIENTE));
+			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(0));
+		} catch (Exception e) {
+			fail(TIPO_NO_CORRECTO);
+		}
+	}
 	
 	@Test
 	public void borrarReservaNoExistenteLanzaExcepcion() {
