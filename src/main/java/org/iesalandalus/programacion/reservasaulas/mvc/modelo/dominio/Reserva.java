@@ -49,15 +49,29 @@ public class Reserva {
 		if (permanencia == null) {
 			throw new NullPointerException("ERROR: La reserva se debe hacer para una permanencia concreta.");
 		}
-		this.permanencia = new Permanencia(permanencia);
+		if (permanencia instanceof PermanenciaPorTramo) {
+			this.permanencia = new PermanenciaPorTramo((PermanenciaPorTramo)permanencia);
+		} else if (permanencia instanceof PermanenciaPorHora) {
+			this.permanencia = new PermanenciaPorHora((PermanenciaPorHora)permanencia);
+		}
 	}
 	
 	public Permanencia getPermanencia() {
-		return new Permanencia(permanencia);
+		Permanencia copiaPermanencia = null;
+		if (this.permanencia instanceof PermanenciaPorTramo) {
+			copiaPermanencia = new PermanenciaPorTramo((PermanenciaPorTramo)this.permanencia);
+		} else if (this.permanencia instanceof PermanenciaPorHora) {
+			copiaPermanencia = new PermanenciaPorHora((PermanenciaPorHora)this.permanencia);
+		}
+		return copiaPermanencia;
 	}
 	
 	public static Reserva getReservaFicticia(Aula aula, Permanencia permanencia) {
 		return new Reserva(Profesor.getProfesorFicticio("bob@gmail.com"), aula, permanencia);
+	}
+	
+	public float getPuntos() {
+		return permanencia.getPuntos() + aula.getPuntos();
 	}
 
 	@Override
@@ -79,7 +93,7 @@ public class Reserva {
 
 	@Override
 	public String toString() {
-		return String.format("%s, %s, %s", profesor, aula, permanencia);
+		return String.format("%s, %s, %s, puntos=%.1f", profesor, aula, permanencia, getPuntos());
 	}
 
 }

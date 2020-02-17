@@ -2,13 +2,14 @@ package org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 import java.time.LocalDate;
 
 import org.junit.Test;
 
-public class PermanenciaTest {
+public class PermanenciaPorTramoTest {
 	
 	private static final String ERROR_DIA_NULO = "ERROR: El día de una permanencia no puede ser nulo.";
 	private static final String ERROR_TRAMO_NULO = "ERROR: El tramo de una permanencia no puede ser nulo.";
@@ -22,6 +23,7 @@ public class PermanenciaTest {
 	private static final String PERMANENCIA_NO_ESPERADA = "La permanencia copiada debería ser la misma que la pasada como parámetro.";
 	private static final String DIA_NO_ESPERADO = "El día devuelto no es el mismo que el pasado al constructor.";
 	private static final String TRAMO_NO_ESPERADO = "El tramo devuelto no es el mismo que el pasado al constructor.";
+	private static final String PUNTOS_NO_ESPERADOS = "Los puntos devueltos no son los esperados.";
 	private static final String OBJETO_DEBERIA_SER_NULO = "No se debería haber creado el objeto profesor.";
 	private static final LocalDate DIA1 = LocalDate.now();
 	private static final Tramo TRAMO1 = Tramo.MANANA;
@@ -29,20 +31,20 @@ public class PermanenciaTest {
 	private static final Tramo TRAMO2 = Tramo.TARDE;
 
 	@Test
-	public void constructorDiaeValidoTramoValidoCreaPermanenciaCorrectamente() {
-		Permanencia permanencia = new Permanencia(DIA1, TRAMO1);
+	public void constructorDiaValidoTramoValidoCreaPermanenciaPorTramoCorrectamente() {
+		PermanenciaPorTramo permanencia = new PermanenciaPorTramo(DIA1, TRAMO1);
 		assertThat(DIA_NO_ESPERADO, permanencia.getDia(), is(DIA1));
 		assertThat(TRAMO_NO_ESPERADO, permanencia.getTramo(), is(TRAMO1));
-		permanencia = new Permanencia(DIA2, TRAMO2);
+		permanencia = new PermanenciaPorTramo(DIA2, TRAMO2);
 		assertThat(DIA_NO_ESPERADO, permanencia.getDia(), is(DIA2));
 		assertThat(TRAMO_NO_ESPERADO, permanencia.getTramo(), is(TRAMO2));
 	}
 	
 	@Test
 	public void constructorDiaNoValidoTramoValidoLanzaExcepcion() {
-		Permanencia permanencia = null;
+		PermanenciaPorTramo permanencia = null;
 		try {
-			permanencia = new Permanencia(null, TRAMO1);
+			permanencia = new PermanenciaPorTramo(null, TRAMO1);
 			fail(DIA_INCORRECTO);
 		} catch (NullPointerException e) {
 			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_DIA_NULO));
@@ -54,9 +56,9 @@ public class PermanenciaTest {
 	
 	@Test
 	public void constructorDiaValidoTramoNoValidoLanzaExcepcion() {
-		Permanencia permanencia = null;
+		PermanenciaPorTramo permanencia = null;
 		try {
-			permanencia = new Permanencia(DIA1, null);
+			permanencia = new PermanenciaPorTramo(DIA1, null);
 			fail(TRAMO_INCORRECTO);
 		} catch (NullPointerException e) {
 			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_TRAMO_NULO));
@@ -67,9 +69,9 @@ public class PermanenciaTest {
 	}
 	
 	@Test
-	public void constructorPermanenciaValidaCopiaPermanenciaCorrectamente() {
-		Permanencia permanencia1 = new Permanencia(DIA1, TRAMO1);
-		Permanencia permanencia2 = new Permanencia(permanencia1);
+	public void constructorPermanenciaValidaCopiaPermanenciaPorTramoCorrectamente() {
+		PermanenciaPorTramo permanencia1 = new PermanenciaPorTramo(DIA1, TRAMO1);
+		PermanenciaPorTramo permanencia2 = new PermanenciaPorTramo(permanencia1);
 		assertThat(PERMANENCIA_NO_ESPERADA, permanencia2, is(permanencia1));
 		assertThat(DIA_NO_ESPERADO, permanencia2.getDia(), is(DIA1));
 		assertThat(TRAMO_NO_ESPERADO, permanencia2.getTramo(), is(TRAMO1));
@@ -77,9 +79,9 @@ public class PermanenciaTest {
 	
 	@Test
 	public void constructorPermanenciaNulaLanzaExcepcion() {
-		Permanencia permanencia = null;
+		PermanenciaPorTramo permanencia = null;
 		try {
-			permanencia = new Permanencia(null);
+			permanencia = new PermanenciaPorTramo(null);
 			fail(PERMANENCIA_NULA);
 		} catch (NullPointerException e) {
 			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_COPIAR_PERMANENCIA_NULA));
@@ -90,8 +92,14 @@ public class PermanenciaTest {
 	}
 	
 	@Test
+	public void getPuntosDevuelveLosPuntosEsperados() {
+		PermanenciaPorTramo permanencia = new PermanenciaPorTramo(DIA1, TRAMO1);
+		assertThat(PUNTOS_NO_ESPERADOS, permanencia.getPuntos(), is(10));
+	}
+	
+	@Test
 	public void toStringDevuelveLaCadenaEsperada() {
-		Permanencia permanencia = new Permanencia(DIA1, TRAMO1);
+		PermanenciaPorTramo permanencia = new PermanenciaPorTramo(DIA1, TRAMO1);
 		assertThat(CADENA_NO_ESPERADA, permanencia.toString(), is(String.format("día=%s, tramo=%s", DIA1.format(Permanencia.FORMATO_DIA), TRAMO1)));
 	}
 

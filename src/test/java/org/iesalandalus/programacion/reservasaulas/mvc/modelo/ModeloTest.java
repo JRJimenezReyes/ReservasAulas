@@ -14,6 +14,7 @@ import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Permanencia;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.PermanenciaPorTramo;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Tramo;
@@ -58,7 +59,7 @@ public class ModeloTest {
 		profesorNoExistente = Profesor.getProfesorFicticio("patricio@gmail.com");
 		aulaExistente = new Aula("Aula 1", 10);
 		aulaNoExistente = new Aula("Aula 2", 20);
-		permanencia = new Permanencia(LocalDate.now(), Tramo.MANANA);
+		permanencia = new PermanenciaPorTramo(LocalDate.now(), Tramo.MANANA);
 		reserva = new Reserva(profesorExistente, aulaExistente, permanencia);
 	}
 	
@@ -96,9 +97,9 @@ public class ModeloTest {
 	
 	private List<Reserva> simularComportamientoBorrarProfesorConReservas() {
 		List<Reserva> reservasProfesor = new ArrayList<>();
-		reservasProfesor.add(Reserva.getReservaFicticia(new Aula("Aula 1", 10), new Permanencia(LocalDate.now(), Tramo.MANANA)));
-		reservasProfesor.add(Reserva.getReservaFicticia(new Aula("Aula 2", 20), new Permanencia(LocalDate.now(), Tramo.MANANA)));
-		reservasProfesor.add(Reserva.getReservaFicticia(new Aula("Aula 3", 30), new Permanencia(LocalDate.now(), Tramo.MANANA)));
+		reservasProfesor.add(Reserva.getReservaFicticia(new Aula("Aula 1", 10), new PermanenciaPorTramo(LocalDate.now(), Tramo.MANANA)));
+		reservasProfesor.add(Reserva.getReservaFicticia(new Aula("Aula 2", 20), new PermanenciaPorTramo(LocalDate.now(), Tramo.MANANA)));
+		reservasProfesor.add(Reserva.getReservaFicticia(new Aula("Aula 3", 30), new PermanenciaPorTramo(LocalDate.now(), Tramo.MANANA)));
 		when(reservasSimuladas.get(Profesor.getProfesorFicticio("bob@gmail.com"))).thenReturn(reservasProfesor);
 		return reservasProfesor;
 	}
@@ -144,9 +145,9 @@ public class ModeloTest {
 	private List<Reserva> simularComportamientoBorrarAulaConReservas() {
 		List<Reserva> reservasAula = new ArrayList<>();
 		Aula aula1 = new Aula("Aula 1", 10);
-		reservasAula.add(Reserva.getReservaFicticia(aula1, new Permanencia(LocalDate.now(), Tramo.MANANA)));
-		reservasAula.add(Reserva.getReservaFicticia(aula1, new Permanencia(LocalDate.now(), Tramo.TARDE)));
-		reservasAula.add(Reserva.getReservaFicticia(aula1, new Permanencia(LocalDate.now().plusDays(1), Tramo.MANANA)));
+		reservasAula.add(Reserva.getReservaFicticia(aula1, new PermanenciaPorTramo(LocalDate.now(), Tramo.MANANA)));
+		reservasAula.add(Reserva.getReservaFicticia(aula1, new PermanenciaPorTramo(LocalDate.now(), Tramo.TARDE)));
+		reservasAula.add(Reserva.getReservaFicticia(aula1, new PermanenciaPorTramo(LocalDate.now().plusDays(1), Tramo.MANANA)));
 		when(reservasSimuladas.get(aula1)).thenReturn(reservasAula);
 		return reservasAula;
 	}

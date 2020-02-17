@@ -8,6 +8,8 @@ import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Permanencia;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.PermanenciaPorHora;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.PermanenciaPorTramo;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 
@@ -22,7 +24,19 @@ public class Reservas {
 	public List<Reserva> get() {
 		List<Reserva> reservasOrdenadas = copiaProfundaReservas();
 		Comparator<Aula> comparadorAula = Comparator.comparing(Aula::getNombre);
-		Comparator<Permanencia> comparadorPermanencia = Comparator.comparing(Permanencia::getDia).thenComparing(Permanencia::getTramo);
+		Comparator<Permanencia> comparadorPermanencia = (Permanencia p1, Permanencia p2) -> {
+			int comparacion = -1;
+			if (p1.getDia().equals(p2.getDia())) {
+				if (p1 instanceof PermanenciaPorTramo && p2 instanceof PermanenciaPorTramo) {
+					comparacion = Integer.compare(((PermanenciaPorTramo)p1).getTramo().ordinal(), ((PermanenciaPorTramo)p2).getTramo().ordinal());
+				} else if (p1 instanceof PermanenciaPorHora && p2 instanceof PermanenciaPorHora) {
+					comparacion = ((PermanenciaPorHora)p1).getHora().compareTo(((PermanenciaPorHora)p2).getHora());
+				}
+			} else {
+				comparacion = p1.getDia().compareTo(p2.getDia());
+			}
+			return comparacion;
+		};
 		reservasOrdenadas.sort(Comparator.comparing(Reserva::getAula, comparadorAula).thenComparing(Reserva::getPermanencia, comparadorPermanencia));
 		return reservasOrdenadas;
 	}
@@ -46,7 +60,19 @@ public class Reservas {
 			}
 		}
 		Comparator<Aula> comparadorAula = Comparator.comparing(Aula::getNombre);
-		Comparator<Permanencia> comparadorPermanencia = Comparator.comparing(Permanencia::getDia).thenComparing(Permanencia::getTramo);
+		Comparator<Permanencia> comparadorPermanencia = (Permanencia p1, Permanencia p2) -> {
+			int comparacion = -1;
+			if (p1.getDia().equals(p2.getDia())) {
+				if (p1 instanceof PermanenciaPorTramo && p2 instanceof PermanenciaPorTramo) {
+					comparacion = Integer.compare(((PermanenciaPorTramo)p1).getTramo().ordinal(), ((PermanenciaPorTramo)p2).getTramo().ordinal());
+				} else if (p1 instanceof PermanenciaPorHora && p2 instanceof PermanenciaPorHora) {
+					comparacion = ((PermanenciaPorHora)p1).getHora().compareTo(((PermanenciaPorHora)p2).getHora());
+				}
+			} else {
+				comparacion = p1.getDia().compareTo(p2.getDia());
+			}
+			return comparacion;
+		};		
 		reservasProfesor.sort(Comparator.comparing(Reserva::getAula, comparadorAula).thenComparing(Reserva::getPermanencia, comparadorPermanencia));
 		return reservasProfesor;
 	}
@@ -61,7 +87,19 @@ public class Reservas {
 				reservasAula.add(new Reserva(reserva));
 			}
 		}
-		Comparator<Permanencia> comparadorPermanencia = Comparator.comparing(Permanencia::getDia).thenComparing(Permanencia::getTramo);
+		Comparator<Permanencia> comparadorPermanencia = (Permanencia p1, Permanencia p2) -> {
+			int comparacion = -1;
+			if (p1.getDia().equals(p2.getDia())) {
+				if (p1 instanceof PermanenciaPorTramo && p2 instanceof PermanenciaPorTramo) {
+					comparacion = Integer.compare(((PermanenciaPorTramo)p1).getTramo().ordinal(), ((PermanenciaPorTramo)p2).getTramo().ordinal());
+				} else if (p1 instanceof PermanenciaPorHora && p2 instanceof PermanenciaPorHora) {
+					comparacion = ((PermanenciaPorHora)p1).getHora().compareTo(((PermanenciaPorHora)p2).getHora());
+				}
+			} else {
+				comparacion = p1.getDia().compareTo(p2.getDia());
+			}
+			return comparacion;
+		};
 		reservasAula.sort(Comparator.comparing(Reserva::getPermanencia, comparadorPermanencia));
 		return reservasAula;
 	}

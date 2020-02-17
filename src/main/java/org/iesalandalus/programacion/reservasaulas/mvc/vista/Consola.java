@@ -1,11 +1,14 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.vista;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Permanencia;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.PermanenciaPorHora;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.PermanenciaPorTramo;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Tramo;
@@ -67,7 +70,26 @@ public class Consola {
 	}
 	
 	public static Permanencia leerPermanencia() {
-		return new Permanencia(leerDia(), leerTramo());
+		int ordinalPermanencia = Consola.elegirPermanencia();
+		LocalDate dia = leerDia();
+		Permanencia permanencia = null;
+		if (ordinalPermanencia == 0) {
+			Tramo tramo = leerTramo();
+			permanencia = new PermanenciaPorTramo(dia, tramo);
+		} else if (ordinalPermanencia == 1) {
+			LocalTime hora = leerHora();
+			permanencia = new PermanenciaPorHora(dia, hora);
+		}
+		return permanencia;
+	}
+	
+	public static int elegirPermanencia() {
+		int ordinalPermanencia;
+		do {
+			System.out.print("\nElige una permanencia (0.- Por Tamo, 1.- Por Hora): ");
+			ordinalPermanencia = Entrada.entero();
+		} while (ordinalPermanencia < 0 || ordinalPermanencia > 1);
+		return ordinalPermanencia;
 	}
 	
 	private static LocalDate leerDia() {
@@ -94,6 +116,20 @@ public class Consola {
 			tramo = Tramo.values()[tramoLeido];
 		}
 		return tramo;
+	}
+	
+	private static LocalTime leerHora() {
+		LocalTime hora = null;
+		String cadenaFormato = "HH:mm";
+		DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern(cadenaFormato);
+		System.out.printf("Introduce la hora (%s): ", cadenaFormato);
+		String horaLeida = Entrada.cadena();
+		try {
+			hora = LocalTime.parse(horaLeida, formatoHora);
+		} catch (DateTimeParseException e) {
+			System.out.println("ERROR: El formato de la hora no es correcto.");
+		}
+		return hora;
 	}
 	
 	public static Reserva leerReserva() {

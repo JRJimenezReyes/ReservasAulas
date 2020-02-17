@@ -2,18 +2,15 @@ package org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
-public class Permanencia {
+public abstract class Permanencia {
 
 	private LocalDate dia;
-	private Tramo tramo;
 
 	protected static final DateTimeFormatter FORMATO_DIA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-	public Permanencia(LocalDate dia, Tramo tramo) {
+	public Permanencia(LocalDate dia) {
 		setDia(dia);
-		setTramo(tramo);
 	}
 	
 	public Permanencia(Permanencia permanencia) {
@@ -21,7 +18,6 @@ public class Permanencia {
 			throw new NullPointerException("ERROR: No se puede copiar una permanencia nula.");
 		}
 		setDia(permanencia.getDia());
-		setTramo(permanencia.getTramo());
 	}
 
 	public LocalDate getDia() {
@@ -34,38 +30,16 @@ public class Permanencia {
 		}
 		this.dia = dia;
 	}
+	
+	public abstract int getPuntos();
 
-	public Tramo getTramo() {
-		return tramo;
-	}
+	public abstract int hashCode();
 
-	private void setTramo(Tramo tramo) {
-		if (tramo == null) {
-			throw new NullPointerException("ERROR: El tramo de una permanencia no puede ser nulo.");
-		}
-		this.tramo = tramo;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(dia, tramo);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof Permanencia)) {
-			return false;
-		}
-		Permanencia other = (Permanencia) obj;
-		return Objects.equals(dia, other.dia) && tramo == other.tramo;
-	}
+	public abstract boolean equals(Object obj);
 
 	@Override
 	public String toString() {
-		return String.format("día=%s, tramo=%s", dia.format(FORMATO_DIA), tramo);
+		return String.format("día=%s", dia.format(FORMATO_DIA));
 	}
 
 }

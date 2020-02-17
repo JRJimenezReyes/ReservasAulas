@@ -8,12 +8,15 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Permanencia;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.PermanenciaPorHora;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.PermanenciaPorTramo;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Tramo;
@@ -37,7 +40,7 @@ public class ReservasTest {
 	private static final String OPERACION_NO_REALIZADA = "La operación no la ha realizado correctamente.";
 	private static final String REFERENCIA_NO_ESPERADA = "La referencia devuelta es la misma que la pasada.";
 	private static final String TAMANO_NO_ESPERADO = "El tamaño devuelto no es el esperado.";
-	private static final String RESERVA_NO_ESPERADA = "El reserva devuelta no es la que debería ser.";
+	private static final String RESERVA_NO_ESPERADA = "La reserva devuelta no es la que debería ser.";
 	private static final String OBJETO_DEBERIA_SER_NULO = "No se debería haber creado el objeto.";
 	
 	private static Profesor profesor1;
@@ -49,12 +52,20 @@ public class ReservasTest {
 	private static Permanencia permanencia1;
 	private static Permanencia permanencia2;
 	private static Permanencia permanencia3;
+	private static Permanencia permanencia4;
+	private static Permanencia permanencia5;
+	private static Permanencia permanencia6;
 	private static Reserva reserva1;
 	private static Reserva reserva2;
 	private static Reserva reserva3;
 	private static Reserva reserva4;
 	private static Reserva reserva5;
-	private static Reserva reservaRepetida;
+	private static Reserva reserva6;
+	private static Reserva reserva7;
+	private static Reserva reserva8;
+	private static Reserva reserva9;
+	private static Reserva reservaRepetidaTramo;
+	private static Reserva reservaRepetidaHora;
 	
 	@BeforeClass
 	public static void asignarValoresAtributos() {
@@ -64,15 +75,23 @@ public class ReservasTest {
 		aula1 = new Aula("Aula 1", 10);
 		aula2 = new Aula("Aula 2", 20);
 		aula3 = new Aula("Aula 3", 30);
-		permanencia1 = new Permanencia(LocalDate.now(), Tramo.MANANA);
-		permanencia2 = new Permanencia(LocalDate.now(), Tramo.TARDE);
-		permanencia3 = new Permanencia(LocalDate.now().plusDays(1), Tramo.MANANA);
+		permanencia1 = new PermanenciaPorTramo(LocalDate.now(), Tramo.MANANA);
+		permanencia2 = new PermanenciaPorTramo(LocalDate.now(), Tramo.TARDE);
+		permanencia3 = new PermanenciaPorTramo(LocalDate.now().plusDays(1), Tramo.MANANA);
+		permanencia4 = new PermanenciaPorHora(LocalDate.now().plusDays(2), LocalTime.of(10, 0));
+		permanencia5 = new PermanenciaPorHora(LocalDate.now().plusDays(2), LocalTime.of(11, 0));
+		permanencia6 = new PermanenciaPorHora(LocalDate.now().plusDays(2), LocalTime.of(12, 0));
 		reserva1 = new Reserva(profesor1, aula1, permanencia3);
 		reserva2 = new Reserva(profesor1, aula2, permanencia3);
 		reserva3 = new Reserva(profesor3, aula3, permanencia3);
 		reserva4 = new Reserva(profesor1, aula2, permanencia2);
 		reserva5 = new Reserva(profesor2, aula2, permanencia1);
-		reservaRepetida = new Reserva(profesor1, aula2, permanencia3);
+		reserva6 = new Reserva(profesor3, aula2, permanencia6);
+		reserva7 = new Reserva(profesor2, aula2, permanencia5);
+		reserva8 = new Reserva(profesor1, aula2, permanencia4);
+		reserva9 = new Reserva(profesor2, aula1, permanencia4);
+		reservaRepetidaTramo = new Reserva(profesor1, aula2, permanencia3);
+		reservaRepetidaHora = new Reserva(profesor1, aula2, permanencia4);
 	}
 	
 	@Test
@@ -84,18 +103,30 @@ public class ReservasTest {
 			reservas.insertar(reserva3);
 			reservas.insertar(reserva4);
 			reservas.insertar(reserva5);
+			reservas.insertar(reserva6);
+			reservas.insertar(reserva7);
+			reservas.insertar(reserva8);
+			reservas.insertar(reserva9);
 			List<Reserva> copiaReservas = reservas.get();
-			assertThat(TAMANO_NO_ESPERADO, copiaReservas.size(), is(5));
+			assertThat(TAMANO_NO_ESPERADO, copiaReservas.size(), is(9));
 			assertThat(RESERVA_NO_ESPERADA, copiaReservas.get(0), is(reserva1));
 			assertThat(REFERENCIA_NO_ESPERADA, copiaReservas.get(0), not(sameInstance(reserva1)));
-			assertThat(RESERVA_NO_ESPERADA, copiaReservas.get(1), is(reserva5));
-			assertThat(REFERENCIA_NO_ESPERADA, copiaReservas.get(1), not(sameInstance(reserva5)));
-			assertThat(RESERVA_NO_ESPERADA, copiaReservas.get(2), is(reserva4));
-			assertThat(REFERENCIA_NO_ESPERADA, copiaReservas.get(2), not(sameInstance(reserva4)));
-			assertThat(RESERVA_NO_ESPERADA, copiaReservas.get(3), is(reserva2));
-			assertThat(REFERENCIA_NO_ESPERADA, copiaReservas.get(3), not(sameInstance(reserva2)));
-			assertThat(RESERVA_NO_ESPERADA, copiaReservas.get(4), is(reserva3));
-			assertThat(REFERENCIA_NO_ESPERADA, copiaReservas.get(4), not(sameInstance(reserva3)));
+			assertThat(RESERVA_NO_ESPERADA, copiaReservas.get(1), is(reserva9));
+			assertThat(REFERENCIA_NO_ESPERADA, copiaReservas.get(1), not(sameInstance(reserva9)));
+			assertThat(RESERVA_NO_ESPERADA, copiaReservas.get(2), is(reserva5));
+			assertThat(REFERENCIA_NO_ESPERADA, copiaReservas.get(2), not(sameInstance(reserva5)));
+			assertThat(RESERVA_NO_ESPERADA, copiaReservas.get(3), is(reserva4));
+			assertThat(REFERENCIA_NO_ESPERADA, copiaReservas.get(3), not(sameInstance(reserva4)));
+			assertThat(RESERVA_NO_ESPERADA, copiaReservas.get(4), is(reserva2));
+			assertThat(REFERENCIA_NO_ESPERADA, copiaReservas.get(4), not(sameInstance(reserva2)));
+			assertThat(RESERVA_NO_ESPERADA, copiaReservas.get(5), is(reserva8));
+			assertThat(REFERENCIA_NO_ESPERADA, copiaReservas.get(5), not(sameInstance(reserva8)));
+			assertThat(RESERVA_NO_ESPERADA, copiaReservas.get(6), is(reserva7));
+			assertThat(REFERENCIA_NO_ESPERADA, copiaReservas.get(6), not(sameInstance(reserva7)));
+			assertThat(RESERVA_NO_ESPERADA, copiaReservas.get(7), is(reserva6));
+			assertThat(REFERENCIA_NO_ESPERADA, copiaReservas.get(7), not(sameInstance(reserva6)));
+			assertThat(RESERVA_NO_ESPERADA, copiaReservas.get(8), is(reserva3));
+			assertThat(REFERENCIA_NO_ESPERADA, copiaReservas.get(8), not(sameInstance(reserva3)));
 		} catch (OperationNotSupportedException e) {
 			fail(EXCEPCION_NO_PROCEDE);
 		}
@@ -110,6 +141,10 @@ public class ReservasTest {
 			reservas.insertar(reserva3);
 			reservas.insertar(reserva4);
 			reservas.insertar(reserva5);
+			reservas.insertar(reserva6);
+			reservas.insertar(reserva7);
+			reservas.insertar(reserva8);
+			reservas.insertar(reserva9);
 			List<Reserva> reservasProfesor = reservas.get(profesor1);
 			assertThat(OPERACION_NO_REALIZADA, reservasProfesor.get(0), is(reserva1));
 			assertThat(REFERENCIA_NO_ESPERADA, reservasProfesor.get(0), not(sameInstance(reserva1)));
@@ -117,7 +152,9 @@ public class ReservasTest {
 			assertThat(REFERENCIA_NO_ESPERADA, reservasProfesor.get(1), not(sameInstance(reserva4)));
 			assertThat(OPERACION_NO_REALIZADA, reservasProfesor.get(2), is(reserva2));
 			assertThat(REFERENCIA_NO_ESPERADA, reservasProfesor.get(2), not(sameInstance(reserva2)));
-			assertThat(TAMANO_NO_ESPERADO, reservasProfesor.size(), is(3));
+			assertThat(OPERACION_NO_REALIZADA, reservasProfesor.get(3), is(reserva8));
+			assertThat(REFERENCIA_NO_ESPERADA, reservasProfesor.get(3), not(sameInstance(reserva8)));
+			assertThat(TAMANO_NO_ESPERADO, reservasProfesor.size(), is(4));
 		} catch (Exception e) {
 			fail(EXCEPCION_NO_PROCEDE);
 		}
@@ -151,6 +188,10 @@ public class ReservasTest {
 			reservas.insertar(reserva3);
 			reservas.insertar(reserva4);
 			reservas.insertar(reserva5);
+			reservas.insertar(reserva6);
+			reservas.insertar(reserva7);
+			reservas.insertar(reserva8);
+			reservas.insertar(reserva9);
 			List<Reserva> reservasAula = reservas.get(aula2);
 			assertThat(OPERACION_NO_REALIZADA, reservasAula.get(0), is(reserva5));
 			assertThat(REFERENCIA_NO_ESPERADA, reservasAula.get(0), not(sameInstance(reserva5)));
@@ -158,7 +199,13 @@ public class ReservasTest {
 			assertThat(REFERENCIA_NO_ESPERADA, reservasAula.get(1), not(sameInstance(reserva4)));
 			assertThat(OPERACION_NO_REALIZADA, reservasAula.get(2), is(reserva2));
 			assertThat(REFERENCIA_NO_ESPERADA, reservasAula.get(2), not(sameInstance(reserva2)));
-			assertThat(TAMANO_NO_ESPERADO, reservasAula.size(), is(3));
+			assertThat(OPERACION_NO_REALIZADA, reservasAula.get(3), is(reserva8));
+			assertThat(REFERENCIA_NO_ESPERADA, reservasAula.get(3), not(sameInstance(reserva8)));
+			assertThat(OPERACION_NO_REALIZADA, reservasAula.get(4), is(reserva7));
+			assertThat(REFERENCIA_NO_ESPERADA, reservasAula.get(4), not(sameInstance(reserva7)));
+			assertThat(OPERACION_NO_REALIZADA, reservasAula.get(5), is(reserva6));
+			assertThat(REFERENCIA_NO_ESPERADA, reservasAula.get(5), not(sameInstance(reserva6)));
+			assertThat(TAMANO_NO_ESPERADO, reservasAula.size(), is(6));
 		} catch (Exception e) {
 			fail(EXCEPCION_NO_PROCEDE);
 		}
@@ -195,6 +242,15 @@ public class ReservasTest {
 		} catch (OperationNotSupportedException e) {
 			fail(EXCEPCION_NO_PROCEDE);
 		}
+		reservas = new Reservas();
+		try {
+			reservas.insertar(reserva6);
+			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(1));
+			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva6), is(reserva6));
+			assertThat(REFERENCIA_NO_ESPERADA, reservas.buscar(reserva6), not(sameInstance(reserva6)));
+		} catch (OperationNotSupportedException e) {
+			fail(EXCEPCION_NO_PROCEDE);
+		}
 	}
 	
 	@Test
@@ -202,12 +258,12 @@ public class ReservasTest {
 		Reservas reservas = new Reservas();
 		try {
 			reservas.insertar(reserva1);
-			reservas.insertar(reserva2);
+			reservas.insertar(reserva6);
 			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(2));
 			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva1), is(reserva1));
 			assertThat(REFERENCIA_NO_ESPERADA, reservas.buscar(reserva1), not(sameInstance(reserva1)));
-			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva2), is(reserva2));
-			assertThat(REFERENCIA_NO_ESPERADA, reservas.buscar(reserva2), not(sameInstance(reserva2)));
+			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva6), is(reserva6));
+			assertThat(REFERENCIA_NO_ESPERADA, reservas.buscar(reserva6), not(sameInstance(reserva6)));
 		} catch (OperationNotSupportedException e) {
 			fail(EXCEPCION_NO_PROCEDE);
 		}
@@ -219,14 +275,14 @@ public class ReservasTest {
 		try {
 			reservas.insertar(reserva1);
 			reservas.insertar(reserva2);
-			reservas.insertar(reserva3);
+			reservas.insertar(reserva6);
 			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(3));
 			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva1), is(reserva1));
 			assertThat(REFERENCIA_NO_ESPERADA, reservas.buscar(reserva1), not(sameInstance(reserva1)));
 			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva2), is(reserva2));
 			assertThat(REFERENCIA_NO_ESPERADA, reservas.buscar(reserva2), not(sameInstance(reserva2)));
-			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva3), is(reserva3));
-			assertThat(REFERENCIA_NO_ESPERADA, reservas.buscar(reserva3), not(sameInstance(reserva3)));
+			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva6), is(reserva6));
+			assertThat(REFERENCIA_NO_ESPERADA, reservas.buscar(reserva6), not(sameInstance(reserva6)));
 		} catch (OperationNotSupportedException e) {
 			fail(EXCEPCION_NO_PROCEDE);
 		}
@@ -253,7 +309,8 @@ public class ReservasTest {
 			reservas.insertar(reserva1);
 			reservas.insertar(reserva2);
 			reservas.insertar(reserva3);
-			reservas.insertar(reservaRepetida);
+			reservas.insertar(reservaRepetidaTramo);
+			System.out.println(reservas.get());
 			fail(OPERACION_NO_PERMITIDA);
 		} catch (OperationNotSupportedException e) {
 			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_RESERVA_EXISTE));
@@ -266,7 +323,7 @@ public class ReservasTest {
 			reservas.insertar(reserva2);
 			reservas.insertar(reserva1);
 			reservas.insertar(reserva3);
-			reservas.insertar(reservaRepetida);
+			reservas.insertar(reservaRepetidaTramo);
 			fail(OPERACION_NO_PERMITIDA);
 		} catch (OperationNotSupportedException e) {
 			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_RESERVA_EXISTE));
@@ -279,7 +336,47 @@ public class ReservasTest {
 			reservas.insertar(reserva2);
 			reservas.insertar(reserva3);
 			reservas.insertar(reserva1);
-			reservas.insertar(reservaRepetida);
+			reservas.insertar(reservaRepetidaTramo);
+			fail(OPERACION_NO_PERMITIDA);
+		} catch (OperationNotSupportedException e) {
+			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_RESERVA_EXISTE));
+			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(3));
+		} catch (Exception e) {
+			fail(TIPO_NO_CORRECTO);
+		}
+		reservas = new Reservas();
+		try {
+			reservas.insertar(reserva6);
+			reservas.insertar(reserva7);
+			reservas.insertar(reserva8);
+			reservas.insertar(reservaRepetidaHora);
+			System.out.println(reservas.get());
+			fail(OPERACION_NO_PERMITIDA);
+		} catch (OperationNotSupportedException e) {
+			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_RESERVA_EXISTE));
+			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(3));
+		} catch (Exception e) {
+			fail(TIPO_NO_CORRECTO);
+		}
+		reservas = new Reservas();
+		try {
+			reservas.insertar(reserva7);
+			reservas.insertar(reserva6);
+			reservas.insertar(reserva8);
+			reservas.insertar(reservaRepetidaHora);
+			fail(OPERACION_NO_PERMITIDA);
+		} catch (OperationNotSupportedException e) {
+			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_RESERVA_EXISTE));
+			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(3));
+		} catch (Exception e) {
+			fail(TIPO_NO_CORRECTO);
+		}
+		reservas = new Reservas();
+		try {
+			reservas.insertar(reserva7);
+			reservas.insertar(reserva8);
+			reservas.insertar(reserva6);
+			reservas.insertar(reservaRepetidaHora);
 			fail(OPERACION_NO_PERMITIDA);
 		} catch (OperationNotSupportedException e) {
 			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_RESERVA_EXISTE));
@@ -303,10 +400,10 @@ public class ReservasTest {
 		reservas = new Reservas();
 		try {
 			reservas.insertar(reserva1);
-			reservas.insertar(reserva2);
+			reservas.insertar(reserva6);
 			reservas.borrar(reserva1);
 			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(1));
-			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva2), is(reserva2));
+			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva6), is(reserva6));
 			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva1), is(nullValue()));
 		} catch (Exception e) {
 			fail(EXCEPCION_NO_PROCEDE);
@@ -314,11 +411,11 @@ public class ReservasTest {
 		reservas = new Reservas();
 		try {
 			reservas.insertar(reserva1);
-			reservas.insertar(reserva2);
-			reservas.borrar(reserva2);
+			reservas.insertar(reserva6);
+			reservas.borrar(reserva6);
 			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(1));
 			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva1), is(reserva1));
-			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva2), is(nullValue()));
+			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva6), is(nullValue()));
 		} catch (Exception e) {
 			fail(EXCEPCION_NO_PROCEDE);
 		}
@@ -326,12 +423,12 @@ public class ReservasTest {
 		try {
 			reservas.insertar(reserva1);
 			reservas.insertar(reserva2);
-			reservas.insertar(reserva3);
+			reservas.insertar(reserva6);
 			reservas.borrar(reserva1);
 			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(2));
 			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva1), is(nullValue()));
 			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva2), is(reserva2));
-			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva3), is(reserva3));
+			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva6), is(reserva6));
 		} catch (Exception e) {
 			fail(EXCEPCION_NO_PROCEDE);
 		}
@@ -339,12 +436,12 @@ public class ReservasTest {
 		try {
 			reservas.insertar(reserva1);
 			reservas.insertar(reserva2);
-			reservas.insertar(reserva3);
+			reservas.insertar(reserva6);
 			reservas.borrar(reserva2);
 			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(2));
 			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva2), is(nullValue()));
 			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva1), is(reserva1));
-			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva3), is(reserva3));
+			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva6), is(reserva6));
 		} catch (Exception e) {
 			fail(EXCEPCION_NO_PROCEDE);
 		}
@@ -352,10 +449,10 @@ public class ReservasTest {
 		try {
 			reservas.insertar(reserva1);
 			reservas.insertar(reserva2);
-			reservas.insertar(reserva3);
-			reservas.borrar(reserva3);
+			reservas.insertar(reserva6);
+			reservas.borrar(reserva6);
 			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(2));
-			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva3), is(nullValue()));
+			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva6), is(nullValue()));
 			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva1), is(reserva1));
 			assertThat(RESERVA_NO_ESPERADA, reservas.buscar(reserva2), is(reserva2));
 		} catch (Exception e) {
@@ -381,7 +478,7 @@ public class ReservasTest {
 		try {
 			citas.insertar(reserva1);
 			citas.insertar(reserva2);
-			citas.borrar(reserva3);
+			citas.borrar(reserva6);
 			fail(OPERACION_NO_PERMITIDA);
 		} catch (OperationNotSupportedException e) {
 			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_RESERVA_BORRAR_NO_EXISTE));
