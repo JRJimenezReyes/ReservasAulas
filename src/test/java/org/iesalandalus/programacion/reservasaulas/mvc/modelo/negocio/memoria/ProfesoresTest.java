@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio;
+package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -12,6 +12,8 @@ import java.util.List;
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IProfesores;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Profesores;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -46,7 +48,7 @@ public class ProfesoresTest {
 	
 	@Test
 	public void getDevuelveProfesoresOrdenadosPorCorreo() {
-		Profesores profesores = new Profesores();
+		IProfesores profesores = new Profesores();
 		try {
 			profesores.insertar(profesor1);
 			profesores.insertar(profesor2);
@@ -66,7 +68,7 @@ public class ProfesoresTest {
 	
 	@Test
 	public void insertarProfesorValidoConProfesoresVaciosInsertaProfesorCorrectamente() {
-		Profesores profesores = new Profesores();
+		IProfesores profesores = new Profesores();
 		try {
 			profesores.insertar(profesor1);
 			assertThat(TAMANO_NO_ESPERADO, profesores.getTamano(), is(1));
@@ -79,7 +81,7 @@ public class ProfesoresTest {
 	
 	@Test
 	public void insertarDosProfesoresValidosInsertaProfesoresCorrectamente() {
-		Profesores profesores = new Profesores();
+		IProfesores profesores = new Profesores();
 		try {
 			profesores.insertar(profesor1);
 			profesores.insertar(profesor2);
@@ -95,7 +97,7 @@ public class ProfesoresTest {
 	
 	@Test
 	public void insertarTresProfesoresValidosInsertaProfesoresCorrectamente() {
-		Profesores profesores = new Profesores();
+		IProfesores profesores = new Profesores();
 		try {
 			profesores.insertar(profesor1);
 			profesores.insertar(profesor2);
@@ -114,7 +116,7 @@ public class ProfesoresTest {
 	
 	@Test
 	public void insertarProfesorNuloLanzaExcepcion() {
-		Profesores profesores = new Profesores();
+		IProfesores profesores = new Profesores();
 		try {
 			profesores.insertar(null);
 			fail(PROFESOR_NULO);
@@ -128,7 +130,7 @@ public class ProfesoresTest {
 	
 	@Test
 	public void insertarProfesorRepetidoLanzaExcepcion() {
-		Profesores profesores = new Profesores();
+		IProfesores profesores = new Profesores();
 		try {
 			profesores.insertar(profesor1);
 			profesores.insertar(profesor2);
@@ -171,7 +173,7 @@ public class ProfesoresTest {
 	
 	@Test
 	public void borrarProfesorExistenteBorraProfesorCorrectamente() throws OperationNotSupportedException {
-		Profesores profesores = new Profesores();
+		IProfesores profesores = new Profesores();
 		try {
 			profesores.insertar(profesor1);
 			profesores.borrar(profesor1);
@@ -245,7 +247,7 @@ public class ProfesoresTest {
 	
 	@Test
 	public void borrarProfesorNoExistenteLanzaExcepcion() {
-		Profesores citas = new Profesores();
+		IProfesores citas = new Profesores();
 		try {
 			citas.insertar(profesor1);
 			citas.borrar(profesor2);
@@ -272,7 +274,7 @@ public class ProfesoresTest {
 	
 	@Test
 	public void borrarProfesorNuloLanzaExcepcion() {
-		Profesores profesores = new Profesores();
+		IProfesores profesores = new Profesores();
 		try {
 			profesores.insertar(profesor1);
 			profesores.borrar(null);
@@ -287,7 +289,7 @@ public class ProfesoresTest {
 	
 	@Test
 	public void buscarProfesorNuloLanzaExcepcion() {
-		Profesores profesores = new Profesores();
+		IProfesores profesores = new Profesores();
 		try {
 			profesores.insertar(profesor1);
 			profesores.buscar(null);

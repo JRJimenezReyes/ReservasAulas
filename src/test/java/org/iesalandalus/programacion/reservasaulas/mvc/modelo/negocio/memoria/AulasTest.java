@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio;
+package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -12,6 +12,8 @@ import java.util.List;
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IAulas;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Aulas;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -46,7 +48,7 @@ public class AulasTest {
 	
 	@Test
 	public void getDevuelveAulasOrdenadasPorNombre() {
-		Aulas aulas = new Aulas();
+		IAulas aulas = new Aulas();
 		try {
 			aulas.insertar(aula3);
 			aulas.insertar(aula2);
@@ -66,7 +68,7 @@ public class AulasTest {
 	
 	@Test
 	public void insertarAulaValidaConAulasVaciasInsertaAulaCorrectamente() {
-		Aulas aulas = new Aulas();
+		IAulas aulas = new Aulas();
 		try {
 			aulas.insertar(aula1);
 			assertThat(TAMANO_NO_ESPERADO, aulas.getTamano(), is(1));
@@ -79,7 +81,7 @@ public class AulasTest {
 	
 	@Test
 	public void insertarDosAulasValidasInsertaAulasCorrectamente() {
-		Aulas aulas = new Aulas();
+		IAulas aulas = new Aulas();
 		try {
 			aulas.insertar(aula1);
 			aulas.insertar(aula2);
@@ -95,7 +97,7 @@ public class AulasTest {
 	
 	@Test
 	public void insertarTresAulasValidasInsertaAulasCorrectamente() {
-		Aulas aulas = new Aulas();
+		IAulas aulas = new Aulas();
 		try {
 			aulas.insertar(aula1);
 			aulas.insertar(aula2);
@@ -114,7 +116,7 @@ public class AulasTest {
 	
 	@Test
 	public void insertarAulaNulaLanzaExcepcion() {
-		Aulas aulas = new Aulas();
+		IAulas aulas = new Aulas();
 		try {
 			aulas.insertar(null);
 			fail(AULA_NULA);
@@ -128,7 +130,7 @@ public class AulasTest {
 	
 	@Test
 	public void insertarAulaRepetidaLanzaExcepcion() {
-		Aulas aulas = new Aulas();
+		IAulas aulas = new Aulas();
 		try {
 			aulas.insertar(aula1);
 			aulas.insertar(aula2);
@@ -171,7 +173,7 @@ public class AulasTest {
 	
 	@Test
 	public void borrarAulaExistenteBorraAulaCorrectamente() throws OperationNotSupportedException {
-		Aulas aulas = new Aulas();
+		IAulas aulas = new Aulas();
 		try {
 			aulas.insertar(aula1);
 			aulas.borrar(aula1);
@@ -245,7 +247,7 @@ public class AulasTest {
 	
 	@Test
 	public void borrarAulaNoExistenteLanzaExcepcion() {
-		Aulas citas = new Aulas();
+		IAulas citas = new Aulas();
 		try {
 			citas.insertar(aula1);
 			citas.borrar(aula2);
@@ -272,7 +274,7 @@ public class AulasTest {
 	
 	@Test
 	public void borrarAulaNulaLanzaExcepcion() {
-		Aulas aulas = new Aulas();
+		IAulas aulas = new Aulas();
 		try {
 			aulas.insertar(aula1);
 			aulas.borrar(null);
@@ -287,7 +289,7 @@ public class AulasTest {
 	
 	@Test
 	public void buscarAulaNulaLanzaExcepcion() {
-		Aulas aulas = new Aulas();
+		IAulas aulas = new Aulas();
 		try {
 			aulas.insertar(aula1);
 			aulas.buscar(null);

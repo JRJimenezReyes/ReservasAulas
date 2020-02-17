@@ -69,16 +69,16 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <package id="8" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio" 
+  <package id="8" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria" 
     project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio" binary="false" 
-    corner="BOTTOM_RIGHT">    
+    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio/memoria" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="443" width="1250" x="-201" y="693"/>    
     <display autosize="false" stereotype="false" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="9" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.Profesores" 
+  <class id="9" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Profesores" 
     project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio/Profesores.java" 
+    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio/memoria/Profesores.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="14" y="922"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
@@ -87,9 +87,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.Reservas" 
+  <class id="10" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Reservas" 
     project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio/Reservas.java" 
+    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio/memoria/Reservas.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="420" y="922"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
@@ -98,9 +98,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.Aulas" 
+  <class id="11" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Aulas" 
     project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio/Aulas.java" 
+    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio/memoria/Aulas.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="834" y="922"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
@@ -188,185 +188,173 @@
     </display>  
   </class>  
   <association id="20">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="21" name="profesor">        
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="21" name="vista">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="22" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="23">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="24" name="coleccionAulas">        
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="24" name="vista">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="25" minimum="0" maximum="2147483647">        
+      <multiplicity id="25" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="26">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="27" name="permanencia">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="28" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="29">    
+  <dependency id="26">    
     <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="15"/>  
+    <end type="TARGET" refId="14"/>  
   </dependency>  
-  <association id="30">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="31" name="aulas">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="32" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="33">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="34" name="tramo">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="35" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="36">    
+  <association id="27">    
     <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="37" name="controlador">        
+      <attribute id="28" name="controlador">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="38" minimum="0" maximum="1">        
+      <multiplicity id="29" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="39">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="40" name="aula">        
+  <dependency id="30">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <association id="31">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="32" name="coleccionAulas">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="41" minimum="0" maximum="1">        
+      <multiplicity id="33" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="42">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="43" name="profesores">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="44" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="45">    
+  <dependency id="34">    
     <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="14"/>  
+    <end type="TARGET" refId="18"/>  
   </dependency>  
-  <association id="46">    
-    <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="47" name="vista">        
+  <association id="35">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="36" name="profesor">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="48" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="49">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="50" name="vista">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="51" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="52">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="53" name="coleccionProfesores">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="54" minimum="0" maximum="2147483647">        
+      <multiplicity id="37" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="55">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="56" name="modelo">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="57" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="58">    
+  <association id="38">    
     <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="59" name="coleccionReservas">        
+      <attribute id="39" name="coleccionReservas">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="60" minimum="0" maximum="2147483647">        
+      <multiplicity id="40" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="61">    
+  <association id="41">    
     <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="62" name="reservas">        
+      <attribute id="42" name="reservas">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="63" minimum="0" maximum="1">        
+      <multiplicity id="43" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="64">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="18"/>  
-  </dependency>  
+  <association id="44">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="45" name="permanencia">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="46" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="47">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="48" name="aula">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="49" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="50">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="51" name="profesores">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="52" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="53">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="54" name="coleccionProfesores">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="55" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="56">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="57" name="modelo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="58" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="59">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="60" name="aulas">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="61" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.reservasaulas.mvc.modelo;
+package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -12,15 +12,18 @@ import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.FactoriaFuenteDatos;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.IModelo;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.Modelo;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Permanencia;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.PermanenciaPorTramo;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Tramo;
-import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.Aulas;
-import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.Profesores;
-import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.Reservas;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Aulas;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Profesores;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Reservas;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +34,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ModeloTest {
+public class ModeloMemoriaTest {
 	
 	private static final String ERROR_RESERVA_NULA = "ERROR: No se puede insertar una reserva nula.";
 	private static final String ERROR_RESERVA_PROFESOR_NO_EXISTENTE = "ERROR: No existe ningún profesor con ese DNI.";
@@ -47,7 +50,7 @@ public class ModeloTest {
 	private static Permanencia permanencia;
 	private static Reserva reserva;
 		
-	@InjectMocks private Modelo modelo;
+	@InjectMocks private IModelo modelo = new Modelo(FactoriaFuenteDatos.MEMORIA.crear());
 	
 	@Mock private Profesores profesoresSimulados;
 	@Mock private Aulas aulasSimuladas;

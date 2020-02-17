@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio;
+package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,8 +13,9 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Permanenci
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.PermanenciaPorTramo;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IReservas;
 
-public class Reservas {
+public class Reservas implements IReservas {
 	
 	private static final float MAX_PUNTOS_PROFESOR_MES = 200.0f;
 
@@ -24,6 +25,7 @@ public class Reservas {
 		coleccionReservas = new ArrayList<>();
 	}
 	
+	@Override
 	public List<Reserva> get() {
 		List<Reserva> reservasOrdenadas = copiaProfundaReservas();
 		Comparator<Aula> comparadorAula = Comparator.comparing(Aula::getNombre);
@@ -52,6 +54,7 @@ public class Reservas {
 		return copiaReservas;
 	}
 	
+	@Override
 	public List<Reserva> get(Profesor profesor) {
 		if (profesor == null) {
 			throw new NullPointerException("ERROR: El profesor no puede ser nulo.");
@@ -80,6 +83,7 @@ public class Reservas {
 		return reservasProfesor;
 	}
 	
+	@Override
 	public List<Reserva> get(Aula aula) {
 		if (aula == null) {
 			throw new NullPointerException("ERROR: El aula no puede ser nula.");
@@ -107,10 +111,12 @@ public class Reservas {
 		return reservasAula;
 	}
 	
+	@Override
 	public int getTamano() {
 		return coleccionReservas.size();
 	}
 	
+	@Override
 	public void insertar(Reserva reserva) throws OperationNotSupportedException {
 		if (reserva == null) {
 			throw new NullPointerException("ERROR: No se puede insertar una reserva nula.");
@@ -184,6 +190,7 @@ public class Reservas {
 		return null;
 	}
 	
+	@Override
 	public Reserva buscar(Reserva reserva) {
 		if (reserva == null) {
 			throw new IllegalArgumentException("ERROR: No se puede buscar una reserva nula.");
@@ -196,6 +203,7 @@ public class Reservas {
 		}
 	}
 	
+	@Override
 	public void borrar(Reserva reserva) throws OperationNotSupportedException {
 		if (reserva == null) {
 			throw new IllegalArgumentException("ERROR: No se puede borrar una reserva nula.");

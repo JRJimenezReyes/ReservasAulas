@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio;
+package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -20,6 +20,8 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Permanenci
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Tramo;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IReservas;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Reservas;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -104,7 +106,7 @@ public class ReservasTest {
 	
 	@Test
 	public void getDevuelveReservasOrdenadasPorAulaYPermanencia() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		try {
 			reservas.insertar(reserva1);
 			reservas.insertar(reserva2);
@@ -142,7 +144,7 @@ public class ReservasTest {
 	
 	@Test
 	public void getProfesorValidoDevuelveReservasProfesorOrdenadasPorAulaYPermanencia() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		try {
 			reservas.insertar(reserva1);
 			reservas.insertar(reserva2);
@@ -170,7 +172,7 @@ public class ReservasTest {
 	
 	@Test
 	public void getProfesorNoValidoLanzaExcepcion() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		List<Reserva> reservasProfesor = null;
 		try {
 			reservas.insertar(reserva1);
@@ -189,7 +191,7 @@ public class ReservasTest {
 	
 	@Test
 	public void getAulaValidaDevuelveReservasAulaOrdenadasPorPermanencia() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		try {
 			reservas.insertar(reserva1);
 			reservas.insertar(reserva2);
@@ -221,7 +223,7 @@ public class ReservasTest {
 	
 	@Test
 	public void getAulaNoValidaLanzaExcepcion() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		List<Reserva> reservasAula = null;
 		try {
 			reservas.insertar(reserva1);
@@ -241,7 +243,7 @@ public class ReservasTest {
 	
 	@Test
 	public void insertarReservaValidaConReservasVaciasInsertaReservaCorrectamente() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		try {
 			reservas.insertar(reserva1);
 			assertThat(TAMANO_NO_ESPERADO, reservas.getTamano(), is(1));
@@ -263,7 +265,7 @@ public class ReservasTest {
 	
 	@Test
 	public void insertarDosReservasValidasInsertaReservasCorrectamente() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		try {
 			reservas.insertar(reserva1);
 			reservas.insertar(reserva6);
@@ -279,7 +281,7 @@ public class ReservasTest {
 	
 	@Test
 	public void insertarTresReservasValidasInsertaReservasCorrectamente() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		try {
 			reservas.insertar(reserva1);
 			reservas.insertar(reserva2);
@@ -298,7 +300,7 @@ public class ReservasTest {
 	
 	@Test
 	public void insertarReservaNulaLanzaExcepcion() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		try {
 			reservas.insertar(null);
 			fail(RESERVA_NULA);
@@ -312,7 +314,7 @@ public class ReservasTest {
 	
 	@Test
 	public void insertarReservaRepetidaLanzaExcepcion() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		try {
 			reservas.insertar(reserva1);
 			reservas.insertar(reserva2);
@@ -396,7 +398,7 @@ public class ReservasTest {
 	
 	@Test
 	public void insertarReservaMismoDiaDiferenteTipoPermanenciaLanzaExcepcion() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		try {
 			reservas.insertar(reservaTramo);
 			reservas.insertar(reservaHora);
@@ -422,7 +424,7 @@ public class ReservasTest {
 	
 	@Test
 	public void insertarReservaNoMesQueVieneLanzaExcepcion() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		try {
 			reservas.insertar(new Reserva(profesor1, aula1, new PermanenciaPorTramo(LocalDate.now(), Tramo.MANANA)));
 			fail(OPERACION_NO_PERMITIDA);
@@ -466,7 +468,7 @@ public class ReservasTest {
 	
 	@Test
 	public void insertarReservaPuntosSobrepasadosProfesorLanzaExcepcion() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		try {
 			reservas.insertar(new Reserva(profesor1, aula3, permanencia1));
 			reservas.insertar(new Reserva(profesor1, aula3, permanencia2));
@@ -486,7 +488,7 @@ public class ReservasTest {
 	
 	@Test
 	public void borrarReservaExistenteBorraReservaCorrectamente() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		try {
 			reservas.insertar(reserva1);
 			reservas.borrar(reserva1);
@@ -560,7 +562,7 @@ public class ReservasTest {
 	
 	@Test
 	public void borrarReservaNoMesQueVieneLanzaExcepcion() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		try {
 			reservas.borrar(new Reserva(profesor1, aula1, new PermanenciaPorTramo(LocalDate.now(), Tramo.MANANA)));
 			fail(OPERACION_NO_PERMITIDA);
@@ -604,7 +606,7 @@ public class ReservasTest {
 	
 	@Test
 	public void borrarReservaNoExistenteLanzaExcepcion() {
-		Reservas citas = new Reservas();
+		IReservas citas = new Reservas();
 		try {
 			citas.insertar(reserva1);
 			citas.borrar(reserva2);
@@ -631,7 +633,7 @@ public class ReservasTest {
 	
 	@Test
 	public void borrarReservaNulaLanzaExcepcion() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		try {
 			reservas.insertar(reserva1);
 			reservas.borrar(null);
@@ -646,7 +648,7 @@ public class ReservasTest {
 	
 	@Test
 	public void buscarReservaNulaLanzaExcepcion() {
-		Reservas reservas = new Reservas();
+		IReservas reservas = new Reservas();
 		try {
 			reservas.insertar(reserva1);
 			reservas.buscar(null);

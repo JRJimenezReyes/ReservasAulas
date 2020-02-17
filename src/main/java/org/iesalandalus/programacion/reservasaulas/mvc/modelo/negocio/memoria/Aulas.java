@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio;
+package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -7,8 +7,9 @@ import java.util.List;
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IAulas;
 
-public class Aulas {
+public class Aulas implements IAulas {
 
 	private List<Aula> coleccionAulas;
 	
@@ -16,6 +17,7 @@ public class Aulas {
 		coleccionAulas = new ArrayList<>();
 	}
 	
+	@Override
 	public List<Aula> get() {
 		List<Aula> aulasOrdenadas = copiaProfundaAulas();
 		aulasOrdenadas.sort(Comparator.comparing(Aula::getNombre));
@@ -30,11 +32,13 @@ public class Aulas {
 		return copiaAulas;
 	}
 	
+	@Override
 	public int getTamano() {
 		return coleccionAulas.size();
 	}
 	
 	
+	@Override
 	public void insertar(Aula aula) throws OperationNotSupportedException {
 		if (aula == null) {
 			throw new NullPointerException("ERROR: No se puede insertar un aula nula.");
@@ -48,6 +52,7 @@ public class Aulas {
 		
 	}
 	
+	@Override
 	public Aula buscar(Aula aula) {
 		if (aula == null) {
 			throw new IllegalArgumentException("ERROR: No se puede buscar un aula nula.");
@@ -60,6 +65,7 @@ public class Aulas {
 		}
 	}
 	
+	@Override
 	public void borrar(Aula aula) throws OperationNotSupportedException {
 		if (aula == null) {
 			throw new IllegalArgumentException("ERROR: No se puede borrar un aula nula.");

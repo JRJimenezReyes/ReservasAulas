@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
-import org.iesalandalus.programacion.reservasaulas.mvc.modelo.Modelo;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.IModelo;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
@@ -13,9 +13,9 @@ import org.iesalandalus.programacion.reservasaulas.mvc.vista.Vista;
 public class Controlador {
 
 	private Vista vista;
-	private Modelo modelo;
+	private IModelo modelo;
 	
-	public Controlador(Modelo modelo, Vista vista) {
+	public Controlador(IModelo modelo, Vista vista) {
 		if (modelo == null) {
 			throw new IllegalArgumentException("ERROR: El modelo no puede ser nulo.");
 		}
