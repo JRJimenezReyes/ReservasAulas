@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.reservasaulas.mvc.vista;
+package org.iesalandalus.programacion.reservasaulas.mvc.vista.texto;
 
 import java.util.List;
 
@@ -8,20 +8,23 @@ import org.iesalandalus.programacion.reservasaulas.mvc.controlador.IControlador;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
+import org.iesalandalus.programacion.reservasaulas.mvc.vista.IVista;
 
 
-public class Vista {
+public class VistaTexto implements IVista {
 	
 	private IControlador controlador;
 	
-	public Vista() {
+	public VistaTexto() {
 		Opcion.setVista(this);
 	}
 	
+	@Override
 	public void setControlador(IControlador controlador) {
 		this.controlador = controlador;
 	}
 	
+	@Override
 	public void comenzar() {
 		Consola.mostrarCabecera("Gestión de las Reservas de Aulas del IES Al-Ándalus");
 		int ordinalOpcion;
@@ -33,10 +36,12 @@ public class Vista {
 		} while (ordinalOpcion != Opcion.SALIR.ordinal());
 	}
 	
+	@Override
 	public void terminar() {
 		controlador.terminar();
 	}
 	
+	@Override
 	public void insertarProfesor() {
 		Consola.mostrarCabecera("Insertar Profesor");
 		try {
@@ -47,6 +52,7 @@ public class Vista {
 		}
 	}
 	
+	@Override
 	public void buscarProfesor() {
 		Consola.mostrarCabecera("Buscar Profesor");
 		Profesor profesor;
@@ -59,6 +65,7 @@ public class Vista {
 		}
 	}
 	
+	@Override
 	public void borrarProfesor() {
 		Consola.mostrarCabecera("Borrar Profesor");
 		try {
@@ -69,6 +76,7 @@ public class Vista {
 		}
 	}
 	
+	@Override
 	public void listarProfesores() {
 		Consola.mostrarCabecera("Listado de Profesores");
 		List<Profesor> profesores = controlador.getProfesores();
@@ -82,6 +90,7 @@ public class Vista {
 		}
 	}
 	
+	@Override
 	public void insertarAula() {
 		Consola.mostrarCabecera("Insertar Aula");
 		try {
@@ -92,6 +101,7 @@ public class Vista {
 		}
 	}
 	
+	@Override
 	public void buscarAula() {
 		Consola.mostrarCabecera("Buscar Aula");
 		Aula aula;
@@ -104,6 +114,7 @@ public class Vista {
 		}
 	}
 	
+	@Override
 	public void borrarAula() {
 		Consola.mostrarCabecera("Borrar Aula");
 		try {
@@ -114,6 +125,7 @@ public class Vista {
 		}
 	}
 	
+	@Override
 	public void listarAulas() {
 		Consola.mostrarCabecera("Listado de Aulas");
 		List<Aula> aulas = controlador.getAulas();
@@ -127,6 +139,7 @@ public class Vista {
 		}
 	}
 	
+	@Override
 	public void insertarReserva() {
 		Consola.mostrarCabecera("Insertar Reserva");
 		try {
@@ -138,6 +151,7 @@ public class Vista {
 		}
 	}
 	
+	@Override
 	public void buscarReserva() {
 		Consola.mostrarCabecera("Buscar Reserva");
 		Reserva reserva;
@@ -150,6 +164,7 @@ public class Vista {
 		}
 	}
 	
+	@Override
 	public void borrarReserva() {
 		Consola.mostrarCabecera("Borrar Reserva");
 		try {
@@ -160,6 +175,7 @@ public class Vista {
 		}
 	}
 	
+	@Override
 	public void listarReservas() {
 		Consola.mostrarCabecera("Listado de Reservas");
 		List<Reserva> reservas = controlador.getReservas();
@@ -173,6 +189,7 @@ public class Vista {
 		}
 	}
 	
+	@Override
 	public void listarReservasProfesor() {
 		Consola.mostrarCabecera("Listado de Reservas por Profesor");
 		List<Reserva> reservas = controlador.getReservas(Consola.leerProfesorFicticio());
@@ -186,6 +203,7 @@ public class Vista {
 		}
 	}
 	
+	@Override
 	public void listarReservasAula() {
 		Consola.mostrarCabecera("Listado de Reservas por Aula");
 		List<Reserva> reservas = controlador.getReservas(Consola.leerAula());

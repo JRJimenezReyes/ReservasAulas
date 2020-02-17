@@ -116,8 +116,9 @@
     <position height="505" width="466" x="176" y="1651"/>    
     <display autosize="false" stereotype="false" sort-features="false" accessors="true"/>  
   </package>  
-  <package id="13" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista" project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista" binary="false" 
+  <package id="13" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.texto" 
+    project="ReservasAulas" 
+    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista/texto" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="575" width="1202" x="-178" y="2186"/>    
     <display autosize="false" stereotype="false" sort-features="false" accessors="true"/>  
@@ -133,10 +134,10 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.Vista" 
+  <class id="15" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.texto.VistaTexto" 
     project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista/Vista.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista/texto/VistaTexto.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="412" y="2494"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -144,9 +145,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.Consola" 
+  <class id="16" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.texto.Consola" 
     project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista/Consola.java" 
+    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista/texto/Consola.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="6" y="2442"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
@@ -155,10 +156,10 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="17" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.Opcion" 
+  <enumeration id="17" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.texto.Opcion" 
     project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista/Opcion.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista/texto/Opcion.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="826" y="2493"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
