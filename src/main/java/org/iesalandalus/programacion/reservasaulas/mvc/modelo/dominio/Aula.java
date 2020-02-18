@@ -52,6 +52,10 @@ public class Aula {
 	public float getPuntos() {
 		return puestos * PUNTOS_POR_PUESTO;
 	}
+	
+	public static Aula getAulaFicticia(String nombre) {
+		return new Aula(nombre, 10);
+	}
 
 	@Override
 	public int hashCode() {

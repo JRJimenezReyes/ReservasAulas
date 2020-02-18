@@ -1,7 +1,5 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.vista.texto;
 
-import org.iesalandalus.programacion.reservasaulas.mvc.vista.IVista;
-
 public enum Opcion {
 	INSERTAR_PROFESOR("Insertar profesor") {
 		public void ejecutar() {
@@ -80,7 +78,7 @@ public enum Opcion {
 	};
 	
 	private String mensaje;
-	private static IVista vista;
+	private static VistaTexto vista;
 	
 	private Opcion(String mensaje) {
 		this.mensaje = mensaje;
@@ -88,7 +86,7 @@ public enum Opcion {
 	
 	public abstract void ejecutar();
 	
-	protected static void setVista(IVista vista) {
+	protected static void setVista(VistaTexto vista) {
 		Opcion.vista = vista;
 	}
 	

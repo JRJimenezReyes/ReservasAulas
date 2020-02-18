@@ -69,6 +69,12 @@ public class Consola {
 		return new Aula(nombre, puestos);
 	}
 	
+	public static Aula leerAulaFicticia() {
+		System.out.print("Introduce el nombre del aula: ");
+		String nombre = Entrada.cadena();
+		return Aula.getAulaFicticia(nombre);
+	}
+	
 	public static Permanencia leerPermanencia() {
 		int ordinalPermanencia = Consola.elegirPermanencia();
 		LocalDate dia = leerDia();
@@ -134,13 +140,13 @@ public class Consola {
 	
 	public static Reserva leerReserva() {
 		Profesor profesor = leerProfesorFicticio();
-		Aula aula = leerAula();
+		Aula aula = leerAulaFicticia();
 		Permanencia permanencia = leerPermanencia();
 		return new Reserva(profesor, aula, permanencia);
 	}
 	
 	public static Reserva leerReservaFicticia() {
-		return Reserva.getReservaFicticia(leerAula(), leerPermanencia());
+		return Reserva.getReservaFicticia(leerAulaFicticia(), leerPermanencia());
 	}
 
 }
