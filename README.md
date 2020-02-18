@@ -1,20 +1,23 @@
 # Ejemplo Tarea: Reservas de Aulas
 ## Profesor: José Ramón Jiménez Reyes
 
-Desde el IES Al-Ándalus nos acaban de comentar que por favor eliminemos la restricción de tamaño en los datos de la aplicación. Por lo que decidimos utilizar estructuras dinámicas de datos, en concreto `Listas`. Para las diferentes clases del modelo que contienen las colecciones de objetos del dominio (las que están incluidas en el paquete `negocio`) deberemos sustituir los `Array` por `ArrayList` y, cómo no, ajustar los diferentes métodos para que sigan haciendo lo mismo que antes, pero utilizando las nuevas estructuras de datos. Como observarás, los métodos privados que teníamos antes desaparecen ya que ahora no serán necesarios.
+Desde el IES Al-Ándalus nos comentan que debemos tener en cuenta los siguientes aspectos:
 
-También nos han comentado que si podemos hacer que los listados que muestra la aplicación se muestren siguiendo un determinado orden. En concreto nos piden:
+- Las aulas se pueden reservar para una permanencia por tramo (de mañana o de tarde) o para una permanencia por horas. La permanencia por horas se hará por horas en punto y no serán anteriores a las 8:00h ni posteriores a las 22:00h.
+- Si para un día se realiza una reserva con permanencia por tramo, para ese día no se podrán hacer reservas por horas y viceversa.
+- Las aulas deben tener información sobre el número de puestos de cada una.
+- Las reservas no se pueden realizar para el mes en curso (sólo para el mes que viene o posteriores).
+- Tampoco podemos anular una reserva a no ser que sea para el mes siguiente o posteriores.
+- En el centro se lleva un sistema de puntos que cada profesor gasta al hacer una reserva:
+    - Una permanencia por tramo restará 10 puntos.
+    - Una permanencia por hora restará 3 puntos.
+    - Un aula restará 0,5 puntos por el número de puestos del aula.
+    - Una reserva restará la suma del número de puntos de la permanencia más el número de puntos del aula.
+    - Un profesor tiene disponibles cada mes 200 puntos por lo que si cuando va a realizar una reserva el número de puntos gastados ese mes más el número de puntos de la reserva que quiere realizar supera ese límite no dejará realizar la reserva.
 
-- Las aulas se ordenararán por su nombre.
-- Los profesores se ordenarán por su correo.
-- Las reservas se ordenarán por aula y por permanencia (por su día y tramo). Cuando se listen las reservas por aula se ordenarán por permanencia. Cuando se listen las reservas por profesor se ordenarán por aula y por permanencia.
+Además queremos aprovechar para implementar el patrón Modelo Vista Controlador en nuestra aplicación.
 
-También nos han pedido que tengamos en cuenta algunas restricciones de integridad más (aparte de la que ya tuvimos en cuenta en el primer spring a lo hora de insertar una reserva):
-
-- Al borrar un aula deberemos borrar todas las reserves asociadas a la misma.
-- Al borrar un profesor deberemos borrar todas las reservas realizadas por dicho profesor.
-
-Por tanto, en este **segundo spring** abarcaremos todos estos requisitos.
+Por tanto, en este **tercer spring** abarcaremos todos estos requisitos.
 
 Se propone seguir el siguiente diagrama de clases:
 
