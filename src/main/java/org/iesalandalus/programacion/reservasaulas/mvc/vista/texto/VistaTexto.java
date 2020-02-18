@@ -41,7 +41,6 @@ public class VistaTexto implements IVista {
 		controlador.terminar();
 	}
 	
-	@Override
 	public void insertarProfesor() {
 		Consola.mostrarCabecera("Insertar Profesor");
 		try {
@@ -52,7 +51,6 @@ public class VistaTexto implements IVista {
 		}
 	}
 	
-	@Override
 	public void buscarProfesor() {
 		Consola.mostrarCabecera("Buscar Profesor");
 		Profesor profesor;
@@ -65,7 +63,6 @@ public class VistaTexto implements IVista {
 		}
 	}
 	
-	@Override
 	public void borrarProfesor() {
 		Consola.mostrarCabecera("Borrar Profesor");
 		try {
@@ -76,7 +73,6 @@ public class VistaTexto implements IVista {
 		}
 	}
 	
-	@Override
 	public void listarProfesores() {
 		Consola.mostrarCabecera("Listado de Profesores");
 		List<Profesor> profesores = controlador.getProfesores();
@@ -90,7 +86,6 @@ public class VistaTexto implements IVista {
 		}
 	}
 	
-	@Override
 	public void insertarAula() {
 		Consola.mostrarCabecera("Insertar Aula");
 		try {
@@ -101,7 +96,6 @@ public class VistaTexto implements IVista {
 		}
 	}
 	
-	@Override
 	public void buscarAula() {
 		Consola.mostrarCabecera("Buscar Aula");
 		Aula aula;
@@ -114,7 +108,6 @@ public class VistaTexto implements IVista {
 		}
 	}
 	
-	@Override
 	public void borrarAula() {
 		Consola.mostrarCabecera("Borrar Aula");
 		try {
@@ -125,7 +118,6 @@ public class VistaTexto implements IVista {
 		}
 	}
 	
-	@Override
 	public void listarAulas() {
 		Consola.mostrarCabecera("Listado de Aulas");
 		List<Aula> aulas = controlador.getAulas();
@@ -139,7 +131,6 @@ public class VistaTexto implements IVista {
 		}
 	}
 	
-	@Override
 	public void insertarReserva() {
 		Consola.mostrarCabecera("Insertar Reserva");
 		try {
@@ -151,7 +142,6 @@ public class VistaTexto implements IVista {
 		}
 	}
 	
-	@Override
 	public void buscarReserva() {
 		Consola.mostrarCabecera("Buscar Reserva");
 		Reserva reserva;
@@ -164,7 +154,6 @@ public class VistaTexto implements IVista {
 		}
 	}
 	
-	@Override
 	public void borrarReserva() {
 		Consola.mostrarCabecera("Borrar Reserva");
 		try {
@@ -175,7 +164,6 @@ public class VistaTexto implements IVista {
 		}
 	}
 	
-	@Override
 	public void listarReservas() {
 		Consola.mostrarCabecera("Listado de Reservas");
 		List<Reserva> reservas = controlador.getReservas();
@@ -189,7 +177,6 @@ public class VistaTexto implements IVista {
 		}
 	}
 	
-	@Override
 	public void listarReservasProfesor() {
 		Consola.mostrarCabecera("Listado de Reservas por Profesor");
 		List<Reserva> reservas = controlador.getReservas(Consola.leerProfesorFicticio());
@@ -203,7 +190,6 @@ public class VistaTexto implements IVista {
 		}
 	}
 	
-	@Override
 	public void listarReservasAula() {
 		Consola.mostrarCabecera("Listado de Reservas por Aula");
 		List<Reserva> reservas = controlador.getReservas(Consola.leerAula());
