@@ -10,32 +10,4 @@ public interface IVista {
 
 	void terminar();
 
-	void insertarProfesor();
-
-	void buscarProfesor();
-
-	void borrarProfesor();
-
-	void listarProfesores();
-
-	void insertarAula();
-
-	void buscarAula();
-
-	void borrarAula();
-
-	void listarAulas();
-
-	void insertarReserva();
-
-	void buscarReserva();
-
-	void borrarReserva();
-
-	void listarReservas();
-
-	void listarReservasProfesor();
-
-	void listarReservasAula();
-
 }
