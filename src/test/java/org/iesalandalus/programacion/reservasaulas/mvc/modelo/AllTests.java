@@ -5,10 +5,10 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Permanenci
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.ProfesorTest;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.ReservaTest;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.TramoTest;
-import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ModeloMemoriaTest;
-import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.AulasTest;
-import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.ProfesoresTest;
-import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.ReservasTest;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ModeloFicherosTest;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros.AulasTest;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros.ProfesoresTest;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros.ReservasTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -16,7 +16,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ ProfesorTest.class, AulaTest.class, TramoTest.class, PermanenciaPorHoraTest.class, ReservaTest.class,
 	ProfesoresTest.class, AulasTest.class, ReservasTest.class,
-	ModeloMemoriaTest.class })
+	ModeloFicherosTest.class })
 public class AllTests {
 
 }

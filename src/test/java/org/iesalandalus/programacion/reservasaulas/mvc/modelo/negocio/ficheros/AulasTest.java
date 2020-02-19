@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
+package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -13,7 +13,7 @@ import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IAulas;
-import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Aulas;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros.Aulas;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

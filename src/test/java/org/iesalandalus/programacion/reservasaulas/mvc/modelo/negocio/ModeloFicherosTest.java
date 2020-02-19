@@ -21,9 +21,9 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Permanenci
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Tramo;
-import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Aulas;
-import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Profesores;
-import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Reservas;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros.Aulas;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros.Profesores;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros.Reservas;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +34,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ModeloMemoriaTest {
+public class ModeloFicherosTest {
 	
 	private static final String ERROR_RESERVA_NULA = "ERROR: No se puede insertar una reserva nula.";
 	private static final String ERROR_RESERVA_PROFESOR_NO_EXISTENTE = "ERROR: No existe ningún profesor con ese DNI.";
@@ -50,7 +50,7 @@ public class ModeloMemoriaTest {
 	private static Permanencia permanencia;
 	private static Reserva reserva;
 		
-	@InjectMocks private IModelo modelo = new Modelo(FactoriaFuenteDatos.MEMORIA.crear());
+	@InjectMocks private IModelo modelo = new Modelo(FactoriaFuenteDatos.FICHEROS.crear());
 	
 	@Mock private Profesores profesoresSimulados;
 	@Mock private Aulas aulasSimuladas;
@@ -64,6 +64,24 @@ public class ModeloMemoriaTest {
 		aulaNoExistente = new Aula("Aula 2", 20);
 		permanencia = new PermanenciaPorTramo(LocalDate.now(), Tramo.MANANA);
 		reserva = new Reserva(profesorExistente, aulaExistente, permanencia);
+	}
+	
+	@Test
+	public void comenzarLlamaAulasComenzarProfesoresComenzarReservasComenzar() {
+		modelo.comenzar();
+		InOrder orden = Mockito.inOrder(aulasSimuladas, profesoresSimulados, reservasSimuladas);
+		orden.verify(aulasSimuladas).comenzar();
+		orden.verify(profesoresSimulados).comenzar();
+		orden.verify(reservasSimuladas).comenzar();
+	}
+	
+	@Test
+	public void terminarLlamaAulasComenzarProfesoresComenzarReservasComenzar() {
+		modelo.terminar();
+		InOrder orden = Mockito.inOrder(aulasSimuladas, profesoresSimulados, reservasSimuladas);
+		orden.verify(aulasSimuladas).terminar();
+		orden.verify(profesoresSimulados).terminar();
+		orden.verify(reservasSimuladas).terminar();
 	}
 	
 	@Test
