@@ -25,6 +25,16 @@ public class Modelo implements IModelo {
 	}
 	
 	@Override
+	public void comenzar() {
+		aulas.comenzar();
+	}
+
+	@Override
+	public void terminar() {
+		aulas.terminar();
+	}
+	
+	@Override
 	public void insertar(Profesor profesor) throws OperationNotSupportedException {
 		profesores.insertar(profesor);
 	}
