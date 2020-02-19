@@ -28,12 +28,14 @@ public class Modelo implements IModelo {
 	public void comenzar() {
 		aulas.comenzar();
 		profesores.comenzar();
+		reservas.comenzar();
 	}
 
 	@Override
 	public void terminar() {
 		aulas.terminar();
 		profesores.terminar();
+		reservas.terminar();
 	}
 	
 	@Override
