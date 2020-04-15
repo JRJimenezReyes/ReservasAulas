@@ -12,7 +12,7 @@ public class MainApp {
 
 	public static void main(String[] args) {
 		IModelo modelo = new Modelo(FactoriaFuenteDatos.FICHEROS.crear());
-		IVista vista = FactoriaVista.TEXTO.crear();
+		IVista vista = FactoriaVista.IUGPESTANAS.crear();
 		IControlador controlador = new Controlador(modelo, vista);
 		controlador.comenzar();
 	}
