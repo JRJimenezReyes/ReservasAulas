@@ -35,6 +35,7 @@ public class ControladorVentanaPrincipal {
     private ObservableList<Profesor> profesores = FXCollections.observableArrayList();
     private ObservableList<Reserva> reservasProfesor = FXCollections.observableArrayList();
     private ObservableList<Aula> aulas = FXCollections.observableArrayList();
+    private ObservableList<Reserva> reservasAula = FXCollections.observableArrayList();
 	
 	public void setControladorMVC(IControlador controladorMVC) {
 		this.controladorMVC = controladorMVC;
@@ -51,10 +52,24 @@ public class ControladorVentanaPrincipal {
     @FXML private TableColumn<Reserva, String> tcRPHoraTramo;
     @FXML private TableColumn<Reserva, String> tcRPPuntos;
     
+    @FXML private TableView<Aula> tvAulas;
+    @FXML private TableColumn<Aula, String> tcNombreAula;
+    @FXML private TableColumn<Aula, String> tcPuestos;
+    
+    @FXML private TableView<Reserva> tvReservasAula;
+    @FXML private TableColumn<Reserva, String> tcRAProfesor;
+    @FXML private TableColumn<Reserva, String> tcRADia;
+    @FXML private TableColumn<Reserva, String> tcRAHoraTramo;
+    @FXML private TableColumn<Reserva, String> tcRAPuntos;
+    
     private Stage anadirProfesor;
     private ControladorAnadirProfesor cAnadirProfesor;
     private Stage realizarReservaProfesor;
 	private ControladorRealizarReservaProfesor cRealizarReservaProfesor;
+	private Stage anadirAula;
+	private ControladorAnadirAula cAnadirAula;
+	private Stage realizarReservaAula;
+	private ControladorRealizarReservaAula cRealizarReservaAula;
 	
     @FXML
     private void initialize() {
@@ -63,11 +78,23 @@ public class ControladorVentanaPrincipal {
     	tcTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
     	tvProfesores.setItems(profesores);
     	tvProfesores.getSelectionModel().selectedItemProperty().addListener((ob, ov, nv) -> mostrarReservasProfesor(nv));
+    	
     	tcRPAula.setCellValueFactory(reserva -> new SimpleStringProperty(reserva.getValue().getAula().getNombre()));
     	tcRPDia.setCellValueFactory(reserva -> new SimpleStringProperty(FORMATO_FECHA.format(reserva.getValue().getPermanencia().getDia())));
     	tcRPHoraTramo.setCellValueFactory(reserva -> new SimpleStringProperty(getPermanenciaString(reserva.getValue())));
     	tcRPPuntos.setCellValueFactory(new PropertyValueFactory<>("puntos"));
     	tvReservasProfesor.setItems(reservasProfesor);
+    	
+    	tcNombreAula.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+    	tcPuestos.setCellValueFactory(new PropertyValueFactory<>("puestos"));
+    	tvAulas.setItems(aulas);
+    	tvAulas.getSelectionModel().selectedItemProperty().addListener((ob, ov, nv) -> mostrarReservasAula(nv));
+    	
+    	tcRAProfesor.setCellValueFactory(reserva -> new SimpleStringProperty(reserva.getValue().getProfesor().getNombre()));
+    	tcRADia.setCellValueFactory(reserva -> new SimpleStringProperty(FORMATO_FECHA.format(reserva.getValue().getPermanencia().getDia())));
+    	tcRAHoraTramo.setCellValueFactory(reserva -> new SimpleStringProperty(getPermanenciaString(reserva.getValue())));
+    	tcRAPuntos.setCellValueFactory(new PropertyValueFactory<>("puntos"));
+    	tvReservasAula.setItems(reservasAula);
     }
 	
     @FXML
@@ -128,6 +155,51 @@ public class ControladorVentanaPrincipal {
 		}
     }
     
+    @FXML
+    void anadirAula(ActionEvent event) throws IOException {
+    	crearAnadirAula();
+    	anadirAula.showAndWait();
+    }
+
+    @FXML
+    void borrarAula(ActionEvent event) {
+    	final String BORRAR_AULA = "Borrar Aula";
+    	Aula aula = null;
+		try {
+			aula = tvAulas.getSelectionModel().getSelectedItem();
+			if (aula != null && Dialogos.mostrarDialogoConfirmacion(BORRAR_AULA, "¿Estás seguro de que quieres borrar el aula?", null)) {
+				controladorMVC.borrar(aula);
+				aulas.remove(aula);
+				mostrarReservasProfesor(tvProfesores.getSelectionModel().getSelectedItem());
+				Dialogos.mostrarDialogoInformacion(BORRAR_AULA, "Aula borrada satisfactoriamente");
+			}
+		} catch (Exception e) {
+			Dialogos.mostrarDialogoError(BORRAR_AULA, e.getMessage());
+		}
+    }
+
+    @FXML
+    void realizarReservaAula(ActionEvent event) throws IOException {
+    	crearRealizarReservaAula();
+		realizarReservaAula.showAndWait();
+    }
+    
+    @FXML
+    void anularReservaAula(ActionEvent event) {
+		final String ANULAR_RESERVA = "Anular Reserva";
+    	Reserva reserva = null;
+		try {
+			reserva = tvReservasAula.getSelectionModel().getSelectedItem();
+			if (reserva != null && Dialogos.mostrarDialogoConfirmacion(ANULAR_RESERVA, "¿Estás seguro de que quieres anular la reserva?", null)) {
+				controladorMVC.borrar(reserva);
+				mostrarReservasAula(reserva.getAula());
+				Dialogos.mostrarDialogoInformacion(ANULAR_RESERVA, "Reserva anulada satisfactoriamente");
+			}
+		} catch (Exception e) {
+			Dialogos.mostrarDialogoError(ANULAR_RESERVA, e.getMessage());
+		}
+    }
+    
     public void actualizaProfesores() {
     	profesores.setAll(controladorMVC.getProfesores());
     }
@@ -141,6 +213,14 @@ public class ControladorVentanaPrincipal {
 			reservasProfesor.setAll(controladorMVC.getReservas(profesor));
 		} catch (IllegalArgumentException e) {
 			reservasProfesor.setAll(FXCollections.observableArrayList());
+		}
+    }
+    
+    public void mostrarReservasAula(Aula aula) {
+    	try {
+			reservasAula.setAll(controladorMVC.getReservas(aula));
+		} catch (IllegalArgumentException e) {
+			reservasAula.setAll(FXCollections.observableArrayList());
 		}
     }
     
@@ -193,6 +273,47 @@ public class ControladorVentanaPrincipal {
 		} else {
 			cRealizarReservaProfesor.setProfesor(tvProfesores.getSelectionModel().getSelectedItem());
 			cRealizarReservaProfesor.inicializa();
+		}
+	}
+	
+	private void crearAnadirAula() throws IOException {
+		if (anadirAula == null) {
+			anadirAula = new Stage();
+			FXMLLoader cargadorAnadirAula = new FXMLLoader(
+						getClass().getResource("../vistas/AnadirAula.fxml"));
+			VBox raizAnadirAula = cargadorAnadirAula.load();
+			cAnadirAula = cargadorAnadirAula.getController();
+			cAnadirAula.setControladorMVC(controladorMVC);
+			cAnadirAula.setAulas(aulas);
+			cAnadirAula.inicializa();
+			Scene escenaAnadirProfesor = new Scene(raizAnadirAula);
+			anadirAula.setTitle("Añadir Aula");
+			anadirAula.initModality(Modality.APPLICATION_MODAL); 
+			anadirAula.setScene(escenaAnadirProfesor);
+		} else {
+			cAnadirAula.inicializa();
+		}
+	}
+	
+	private void crearRealizarReservaAula() throws IOException {
+		if (realizarReservaAula == null) {
+			realizarReservaAula = new Stage();
+			FXMLLoader cargadorRealizarReservaAula = new FXMLLoader(
+						getClass().getResource("../vistas/RealizarReservaAula.fxml"));
+			VBox raizRealizarReservaAula = cargadorRealizarReservaAula.load();
+			cRealizarReservaAula = cargadorRealizarReservaAula.getController();
+			cRealizarReservaAula.setControladorMVC(controladorMVC);
+			cRealizarReservaAula.setProfesores(profesores);
+			cRealizarReservaAula.setPadre(this);
+			cRealizarReservaAula.setAula(tvAulas.getSelectionModel().getSelectedItem());
+			Scene escenaRealizarReservaAula = new Scene(raizRealizarReservaAula);
+			realizarReservaAula.setTitle("Realizar Reserva Aula");
+			realizarReservaAula.initModality(Modality.APPLICATION_MODAL); 
+			realizarReservaAula.setScene(escenaRealizarReservaAula);
+			cRealizarReservaAula.inicializa();
+		} else {
+			cRealizarReservaAula.setAula(tvAulas.getSelectionModel().getSelectedItem());
+			cRealizarReservaAula.inicializa();
 		}
 	}
 
