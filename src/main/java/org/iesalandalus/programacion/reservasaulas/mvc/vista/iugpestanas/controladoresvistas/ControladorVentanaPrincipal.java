@@ -210,7 +210,9 @@ public class ControladorVentanaPrincipal {
     
     public void mostrarReservasProfesor(Profesor profesor) {
     	try {
-			reservasProfesor.setAll(controladorMVC.getReservas(profesor));
+    		if (profesor != null) {
+    			reservasProfesor.setAll(controladorMVC.getReservas(profesor));
+    		}
 		} catch (IllegalArgumentException e) {
 			reservasProfesor.setAll(FXCollections.observableArrayList());
 		}
@@ -218,7 +220,9 @@ public class ControladorVentanaPrincipal {
     
     public void mostrarReservasAula(Aula aula) {
     	try {
-			reservasAula.setAll(controladorMVC.getReservas(aula));
+    		if (aula != null) {
+    			reservasAula.setAll(controladorMVC.getReservas(aula));
+    		}
 		} catch (IllegalArgumentException e) {
 			reservasAula.setAll(FXCollections.observableArrayList());
 		}

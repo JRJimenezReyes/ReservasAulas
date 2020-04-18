@@ -45,7 +45,7 @@ public class ControladorAnadirAula {
 		try {
 			aula = getAula();
 			controladorMVC.insertar(aula);
-			aulas.add(aula);
+			aulas.setAll(controladorMVC.getAulas());
 			Stage propietario = ((Stage) btAnadir.getScene().getWindow());
 			Dialogos.mostrarDialogoInformacion("Añadir Aula", "Aula añadida satisfactoriamente", propietario);
 		} catch (Exception e) {

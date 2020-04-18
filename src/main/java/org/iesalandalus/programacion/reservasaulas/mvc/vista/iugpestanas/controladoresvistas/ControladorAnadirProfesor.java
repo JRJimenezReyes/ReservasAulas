@@ -46,7 +46,7 @@ public class ControladorAnadirProfesor {
 		try {
 			profesor = getProfesor();
 			controladorMVC.insertar(profesor);
-			profesores.add(profesor);
+			profesores.setAll(controladorMVC.getProfesores());
 			Stage propietario = ((Stage) btAnadir.getScene().getWindow());
 			Dialogos.mostrarDialogoInformacion("Añadir Profesor", "Profesor añadido satisfactoriamente", propietario);
 		} catch (Exception e) {
