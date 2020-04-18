@@ -87,8 +87,8 @@
                         <Label style="-fx-font-size: 25;" text="Aulas" />
                         <TableView fx:id="tvAulas" prefHeight="200.0" prefWidth="200.0">
                           <columns>
-                            <TableColumn fx:id="tcNombreAula" prefWidth="439.0" text="Nombre" />
-                            <TableColumn fx:id="tcPuestos" prefWidth="168.0" text="Número de puestos" />
+                            <TableColumn fx:id="tcNombreAula" prefWidth="445.0" text="Nombre" />
+                            <TableColumn fx:id="tcPuestos" prefWidth="182.0" text="Número de puestos" />
                           </columns>
                            <contextMenu>
                               <ContextMenu>
@@ -104,10 +104,10 @@
                         <Label style="-fx-font-size: 25;" text="Reservas para el aula" />
                         <TableView fx:id="tvReservasAula" prefHeight="200.0" prefWidth="200.0">
                           <columns>
-                            <TableColumn fx:id="tcRAProfesor" prefWidth="236.0" text="Profesor" />
-                            <TableColumn fx:id="tcRADia" prefWidth="146.0" text="Dia" />
+                            <TableColumn fx:id="tcRAProfesor" prefWidth="258.0" text="Profesor" />
+                            <TableColumn fx:id="tcRADia" prefWidth="124.0" text="Dia" />
                               <TableColumn fx:id="tcRAHoraTramo" prefWidth="128.0" text="Hora o Tramo" />
-                              <TableColumn fx:id="tcRAPuntos" prefWidth="91.0" text="Puntos" />
+                              <TableColumn fx:id="tcRAPuntos" prefWidth="118.0" text="Puntos" />
                           </columns>
                            <contextMenu>
                               <ContextMenu>
@@ -124,6 +124,43 @@
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../imagenes/aula.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+          </Tab>
+          <Tab text="Reservas">
+               <content>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <Label style="-fx-font-size: 25;" text="Reservas" />
+                        <TableView fx:id="tvReservas" prefHeight="359.0" prefWidth="611.0">
+                          <columns>
+                            <TableColumn fx:id="tcProfesor" prefWidth="165.0" text="Profesor" />
+                            <TableColumn fx:id="tcAula" prefWidth="149.0" text="Aula" />
+                              <TableColumn fx:id="tcDia" prefWidth="108.0" text="Dia" />
+                              <TableColumn fx:id="tcHoraTramo" prefWidth="108.0" text="Hora o Tramo" />
+                              <TableColumn fx:id="tcPuntos" prefWidth="97.0" text="Puntos" />
+                          </columns>
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#realizarReserva" text="Realizar Reserva" />
+                                    <MenuItem mnemonicParsing="false" onAction="#anularReserva" text="Anular Reserva" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
+                        </TableView>
+                        
+                     </children>
+                  </VBox>
+               </content>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/reserva.png" />
                      </image>
                   </ImageView>
                </graphic>
