@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox prefHeight="222.0" prefWidth="316.0" styleClass="vbox" stylesheets="@../estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="org.iesalandalus.programacion.reservasaulas.mvc.vista.iugpestanas.controladoresvistas.ControladorVentanaPrincipal">
-	<MenuBar>
+<VBox prefHeight="450.0" prefWidth="650.0" styleClass="vbox" stylesheets="@../estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.reservasaulas.mvc.vista.iugpestanas.controladoresvistas.ControladorVentanaPrincipal">
+   <children>
+      <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="Archivo">
             <items>
@@ -21,4 +23,61 @@
           </Menu>
         </menus>
       </MenuBar>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+        <tabs>
+          <Tab text="Profesores">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/profesores.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <content>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <Label style="-fx-font-size: 25;" text="Profesores" />
+                        <TableView fx:id="tvProfesores" prefHeight="200.0" prefWidth="200.0">
+                          <columns>
+                            <TableColumn fx:id="tcNombreProfesor" prefWidth="285.0" text="Nombre" />
+                            <TableColumn fx:id="tcCorreo" minWidth="0.0" prefWidth="230.0" text="Correo" />
+                            <TableColumn fx:id="tcTelefono" minWidth="0.0" prefWidth="113.0" text="Teléfono" />
+                          </columns>
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#anadirProfesor" text="Añadir Profesor" />
+                                  <MenuItem mnemonicParsing="false" onAction="#borrarProfesor" text="Borrar Profesor" />
+                                  <SeparatorMenuItem mnemonicParsing="false" />
+                                  <MenuItem mnemonicParsing="false" onAction="#realizarReservaProfesor" text="Realizar Reserva" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
+                        </TableView>
+                        <Label style="-fx-font-size: 20;" text="Reservas del profesor" />
+                        <TableView fx:id="tvReservasProfesor" prefHeight="200.0" prefWidth="200.0">
+                          <columns>
+                            <TableColumn fx:id="tcRPAula" prefWidth="222.0" text="Aula" />
+                            <TableColumn fx:id="tcRPDia" prefWidth="141.0" text="Día" />
+                            <TableColumn fx:id="tcRPHoraTramo" prefWidth="175.0" text="Hora / Tramo" />
+                            <TableColumn fx:id="tcRPPuntos" prefWidth="90.0" text="Puntos" />
+                          </columns>
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#anularReservaProfesor" text="Anular  Reserva" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
 </VBox>
