@@ -4,9 +4,10 @@ import java.util.Optional;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -58,6 +59,27 @@ public class Dialogos {
 	
 	public static void mostrarDialogoInformacion(String titulo, String contenido) {
 		Dialogos.mostrarDialogoInformacion(titulo, contenido, null);
+	}
+	
+	public static void mostrarDialogoInformacionPersonalizado(String titulo, Pane contenido, Stage propietario) {
+		Alert dialogo = new Alert(AlertType.INFORMATION);
+		dialogo.getDialogPane().getStylesheets().add(Dialogos.class.getResource(CSS).toExternalForm());
+		((Button) dialogo.getDialogPane().lookupButton(ButtonType.OK)).setId(ID_BT_ACEPTAR);
+		dialogo.setTitle(titulo);
+		dialogo.setHeaderText(null);
+		dialogo.setContentText(null);
+		dialogo.getDialogPane().setHeader(contenido);
+		if (propietario != null) {
+			dialogo.initModality(Modality.APPLICATION_MODAL);
+			dialogo.initOwner(propietario);
+		}
+		dialogo.showAndWait();
+		if (propietario != null)
+			propietario.close();
+	}
+	
+	public static void mostrarDialogoInformacionPersonalizado(String titulo, Pane contenido) {
+		Dialogos.mostrarDialogoInformacionPersonalizado(titulo, contenido, null);
 	}
 	
 	public static void mostrarDialogoAdvertencia(String titulo, String contenido, Stage propietario) {
