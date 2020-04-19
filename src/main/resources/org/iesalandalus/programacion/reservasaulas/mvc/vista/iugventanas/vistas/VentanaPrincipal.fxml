@@ -1,24 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox prefHeight="222.0" prefWidth="316.0" styleClass="vbox" stylesheets="@../estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="org.iesalandalus.programacion.reservasaulas.mvc.vista.iugventanas.controladoresvistas.ControladorVentanaPrincipal">
-	<MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="Archivo">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#salir" text="Salir" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Ayuda">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Acerca de ..." />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+<VBox prefHeight="400.0" prefWidth="350.0" styleClass="vbox" stylesheets="@../estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.reservasaulas.mvc.vista.iugventanas.controladoresvistas.ControladorVentanaPrincipal">
+	<children>
+		<MenuBar>
+			<menus>
+				<Menu mnemonicParsing="false" text="Archivo">
+					<items>
+						<MenuItem mnemonicParsing="false" onAction="#salir" text="Salir" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Ayuda">
+					<items>
+						<MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Acerca de ..." />
+					</items>
+				</Menu>
+			</menus>
+		</MenuBar>
+      <HBox alignment="CENTER" prefHeight="356.0" prefWidth="361.0" spacing="30.0">
+         <children>
+      		<TitledPane collapsible="false" prefHeight="300.0" prefWidth="250.0" text="Profesores">
+      			<content>
+      				<VBox alignment="CENTER" prefHeight="318.0" prefWidth="242.0" spacing="10.0">
+      					<children>
+      						<Button fx:id="btListarProfesores" graphicTextGap="20.0" mnemonicParsing="false" onAction="#listarProfesores" prefHeight="50.0" prefWidth="130.0" text="Listar">
+      							<graphic>
+      								<ImageView fitHeight="40.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+      									<image>
+      										<Image url="@../imagenes/iconoListar.png" />
+      									</image>
+      								</ImageView>
+      							</graphic>
+      						</Button>
+      						<Button fx:id="btAnadirProfesor" graphicTextGap="10.0" mnemonicParsing="false" onAction="#anadirProfesor" prefHeight="50.0" prefWidth="130.0" text="Añadir">
+      							<graphic>
+      								<ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+      									<image>
+      										<Image url="@../imagenes/iconoAnadir.png" />
+      									</image>
+      								</ImageView>
+      							</graphic>
+      						</Button>
+      						<Button fx:id="btBuscarProfesor" graphicTextGap="10.0" mnemonicParsing="false" onAction="#buscarProfesor" prefHeight="50.0" prefWidth="130.0" text="Buscar">
+      							<graphic>
+      								<ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+      									<image>
+      										<Image url="@../imagenes/iconoBuscar.png" />
+      									</image>
+      								</ImageView>
+      							</graphic>
+      						</Button>
+      					</children>
+      					<padding>
+      						<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      					</padding>
+      				</VBox>
+      			</content>
+      			<graphic>
+      				<ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+      					<image>
+      						<Image url="@../imagenes/profesores.png" />
+      					</image>
+      				</ImageView>
+      			</graphic>
+      		</TitledPane>
+         </children>
+         <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </padding>
+      </HBox>
+	</children>
 </VBox>

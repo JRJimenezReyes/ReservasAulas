@@ -104,6 +104,7 @@ public class Dialogos {
 	
 	public static String mostrarDialogoTexto(String titulo, String contenido) {
 		TextInputDialog dialogo = new TextInputDialog();
+		dialogo.setGraphic(null);
 		dialogo.getDialogPane().getStylesheets().add(Dialogos.class.getResource(CSS).toExternalForm());
 		((Button) dialogo.getDialogPane().lookupButton(ButtonType.OK)).setId(ID_BT_ACEPTAR);
 		((Button) dialogo.getDialogPane().lookupButton(ButtonType.CANCEL)).setId(ID_BT_CANCELAR);
