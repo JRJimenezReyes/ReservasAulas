@@ -4,125 +4,23 @@
   <package id="1" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo" project="ReservasAulas" 
     file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="2289" width="1517" x="-286" y="-511"/>    
+    <position height="465" width="1046" x="-231" y="1347"/>    
     <display autosize="false" stereotype="false" sort-features="false" accessors="true"/>  
   </package>  
-  <package id="2" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/dominio" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="1091" width="999" x="-200" y="-455"/>    
-    <display autosize="false" stereotype="false" sort-features="false" accessors="true"/>  
-  </package>  
-  <class id="3" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/dominio/Profesor.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-52" y="415"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/dominio/Reserva.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="293" y="415"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/dominio/Aula.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="644" y="415"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Permanencia" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/dominio/Permanencia.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="293" y="70"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <enumeration id="7" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Tramo" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/dominio/Tramo.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="614" y="70"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </enumeration>  
-  <package id="8" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.controlador" 
+  <package id="2" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.controlador" 
     project="ReservasAulas" 
     file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/controlador" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="456" width="597" x="136" y="1830"/>    
     <display autosize="false" stereotype="false" sort-features="false" accessors="true"/>  
   </package>  
-  <package id="9" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="731" width="1423" x="-242" y="651"/>    
-    <display autosize="false" stereotype="false" sort-features="false" accessors="true"/>  
-  </package>  
-  <interface id="10" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IProfesores" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio/IProfesores.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-52" y="1263"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <interface id="11" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IReservas" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio/IReservas.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="294" y="1263"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <interface id="12" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IAulas" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio/IAulas.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="644" y="1263"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <package id="13" language="java" name="org.iesalandalus.programacion.tutorias.mvc.vista" project="TutoriasResuelto" 
+  <package id="3" language="java" name="org.iesalandalus.programacion.tutorias.mvc.vista" project="TutoriasResuelto" 
     file="/TutoriasResuelto/src/main/java/org/iesalandalus/programacion/tutorias/mvc/vista" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="789" width="1010" x="-196" y="2344"/>    
+    <position height="660" width="1000" x="-193" y="2359"/>    
     <display autosize="false" stereotype="false" sort-features="false" accessors="true"/>  
   </package>  
-  <interface id="14" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.IModelo" 
+  <interface id="4" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.IModelo" 
     project="ReservasAulas" 
     file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/IModelo.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -133,18 +31,18 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="15" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.IFuenteDatos" 
+  <interface id="5" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.IFuenteDatos" 
     project="ReservasAulas" 
     file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/IFuenteDatos.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="967" y="1586"/>    
+    <position height="-1" width="-1" x="643" y="1468"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="16" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.Modelo" 
+  <class id="6" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.Modelo" 
     project="ReservasAulas" 
     file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/Modelo.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -155,7 +53,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="17" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.FactoriaFuenteDatos" 
+  <enumeration id="7" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.FactoriaFuenteDatos" 
     project="ReservasAulas" 
     file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/FactoriaFuenteDatos.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -166,7 +64,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="18" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.controlador.Controlador" 
+  <class id="8" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.controlador.Controlador" 
     project="ReservasAulas" 
     file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/controlador/Controlador.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -177,7 +75,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="19" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.controlador.IControlador" 
+  <interface id="9" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.controlador.IControlador" 
     project="ReservasAulas" 
     file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/controlador/IControlador.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -188,7 +86,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="20" language="java" name="org.iesalandalus.programacion.reservasaulas.MainApp" project="ReservasAulas" 
+  <class id="10" language="java" name="org.iesalandalus.programacion.reservasaulas.MainApp" project="ReservasAulas" 
     file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/MainApp.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1160" y="2052"/>    
@@ -198,7 +96,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="21" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.IVista" 
+  <interface id="11" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.IVista" 
     project="ReservasAulas" 
     file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista/IVista.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -209,7 +107,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <enumeration id="22" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.FactoriaVista" 
+  <enumeration id="12" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.FactoriaVista" 
     project="ReservasAulas" 
     file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista/FactoriaVista.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -220,336 +118,123 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <package id="23" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.texto" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista/texto" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="526" width="876" x="-142" y="2561"/>    
-    <display autosize="false" stereotype="false" sort-features="false" accessors="true"/>  
-  </package>  
-  <class id="24" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.texto.VistaTexto" 
+  <class id="13" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.texto.VistaTexto" 
     project="ReservasAulas" 
     file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista/texto/VistaTexto.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="580" y="2836"/>    
+    <position height="-1" width="-1" x="579" y="2821"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.texto.Consola" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista/texto/Consola.java" 
+  <class id="14" language="java" 
+    name="org.iesalandalus.programacion.reservasaulas.mvc.vista.iugpestanas.VistaIUGPestanas" project="ReservasAulas" 
+    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista/iugpestanas/VistaIUGPestanas.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-3" y="2836"/>    
+    <position height="-1" width="-1" x="-20" y="2712"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="26" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.vista.texto.Opcion" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista/texto/Opcion.java" 
+  <class id="15" language="java" 
+    name="org.iesalandalus.programacion.reservasaulas.mvc.vista.iugventanas.VistaIUGVentanas" project="ReservasAulas" 
+    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/vista/iugventanas/VistaIUGVentanas.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="292" y="2836"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </enumeration>  
-  <class id="27" language="java" 
-    name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.PermanenciaPorHora" project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/dominio/PermanenciaPorHora.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="20" y="-258"/>    
+    <position height="-1" width="-1" x="296" y="2713"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="28" language="java" 
-    name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.PermanenciaPorTramo" project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/dominio/PermanenciaPorTramo.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="617" y="-258"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <package id="29" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio/ficheros" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="440" width="1340" x="-217" y="692"/>    
-    <display autosize="false" stereotype="false" sort-features="false" accessors="true"/>  
-  </package>  
-  <class id="30" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros.Aulas" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio/ficheros/Aulas.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="644" y="935"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="31" language="java" 
-    name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros.Profesores" project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio/ficheros/Profesores.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-52" y="935"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="32" language="java" name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros.Reservas" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio/ficheros/Reservas.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="291" y="935"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="33" language="java" 
-    name="org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros.FactoriaFuenteDatosFicheros" 
-    project="ReservasAulas" 
-    file="/ReservasAulas/src/main/java/org/iesalandalus/programacion/reservasaulas/mvc/modelo/negocio/ficheros/FactoriaFuenteDatosFicheros.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="967" y="935"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <realization id="34">    
-    <end type="SOURCE" refId="31"/>    
-    <end type="TARGET" refId="10"/>  
+  <realization id="16">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="4"/>  
   </realization>  
-  <realization id="35">    
-    <end type="SOURCE" refId="32"/>    
-    <end type="TARGET" refId="11"/>  
+  <association id="17">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="18" name="controlador">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="19" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="20">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="9"/>  
   </realization>  
-  <realization id="36">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="14"/>  
-  </realization>  
-  <realization id="37">    
-    <end type="SOURCE" refId="30"/>    
-    <end type="TARGET" refId="12"/>  
-  </realization>  
-  <association id="38">    
-    <end type="SOURCE" refId="30" navigable="false">      
-      <attribute id="39" name="coleccionAulas"/>      
-      <multiplicity id="40" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="41">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="42" name="permanencia">        
-        <position height="0" width="0" x="-128" y="-3"/>      
+  <association id="21">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="22" name="vista">        
+        <position height="0" width="0" x="-1" y="-118"/>      
       </attribute>      
-      <multiplicity id="43" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-128" y="-3"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="44">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="45" name="modelo">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="46" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="47">    
-    <end type="SOURCE" refId="28"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <association id="48">    
-    <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="49" name="vista">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="50" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="51">    
-    <end type="SOURCE" refId="32" navigable="false">      
-      <attribute id="52" name="coleccionReservas"/>      
-      <multiplicity id="53" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="54">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="55" name="profesor">        
-        <position height="0" width="0" x="-66" y="2"/>      
-      </attribute>      
-      <multiplicity id="56" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-66" y="2"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="57">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="58" name="aula">        
-        <position height="0" width="0" x="-191" y="-2"/>      
-      </attribute>      
-      <multiplicity id="59" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-191" y="-2"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="60">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="14"/>  
-  </dependency>  
-  <dependency id="61">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="12"/>  
-  </dependency>  
-  <association id="62">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="63" name="profesores">        
-        <position height="0" width="0" x="1" y="20"/>      
-      </attribute>      
-      <multiplicity id="64" minimum="0" maximum="1">        
-        <position height="0" width="0" x="1" y="20"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="65">    
-    <end type="SOURCE" refId="28" navigable="false">      
-      <attribute id="66" name="tramo">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="67" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="68">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="19"/>  
-  </realization>  
-  <association id="69">    
-    <end type="SOURCE" refId="31" navigable="false">      
-      <attribute id="70" name="coleccionProfesores"/>      
-      <multiplicity id="71" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="72">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="73" name="reservas">        
-        <position height="0" width="0" x="1" y="20"/>      
-      </attribute>      
-      <multiplicity id="74" minimum="0" maximum="1">        
-        <position height="0" width="0" x="1" y="20"/>      
+      <multiplicity id="23" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1" y="-118"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="75">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="21"/>  
+  <dependency id="24">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="4"/>  
   </dependency>  
-  <dependency id="76">    
+  <association id="25">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="26" name="controladorMVC"/>      
+      <multiplicity id="27" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="28">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="29" name="controladorMVC"/>      
+      <multiplicity id="30" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="31">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="11"/>  
-  </dependency>  
-  <association id="77">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="78" name="vista">        
-        <position height="0" width="0" x="-1" y="-118"/>      
-      </attribute>      
-      <multiplicity id="79" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-1" y="-118"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="80">    
-    <end type="SOURCE" refId="27"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <association id="81">    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="82" name="controlador">        
+  </realization>  
+  <realization id="32">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <association id="33">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="34" name="modelo">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="83" minimum="0" maximum="1">        
+      <multiplicity id="35" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="19" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="84">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="85" name="aulas">        
-        <position height="0" width="0" x="1" y="20"/>      
-      </attribute>      
-      <multiplicity id="86" minimum="0" maximum="1">        
-        <position height="0" width="0" x="1" y="20"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="87">    
-    <end type="SOURCE" refId="24"/>    
-    <end type="TARGET" refId="21"/>  
-  </realization>  
-  <dependency id="88">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="10"/>  
+  <dependency id="36">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="9"/>  
   </dependency>  
-  <realization id="89">    
-    <end type="SOURCE" refId="33"/>    
-    <end type="TARGET" refId="15"/>  
-  </realization>  
-  <dependency id="90">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="19"/>  
+  <dependency id="37">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="11"/>  
   </dependency>  
+  <realization id="38">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
