@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.iesalandalus.programacion.reservasaulas.mvc.controlador.IControlador;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.mvc.vista.iugventanas.utilidades.Dialogos;
 
 import javafx.fxml.FXML;
@@ -29,6 +30,9 @@ public class ControladorVentanaPrincipal {
 	@FXML Button btAnadirAula;
 	@FXML Button btListarAulas;
 	@FXML Button btBuscarAula;
+	@FXML Button btAnadirReserva;
+	@FXML Button btListarReservas;
+	@FXML Button btBuscarReserva;
 	
 	private Stage anadirProfesor;
     private ControladorAnadirProfesor cAnadirProfesor;
@@ -42,6 +46,14 @@ public class ControladorVentanaPrincipal {
     private ControladorListarAulas cListarAulas;
     private Stage mostrarAula;
     private ControladorMostrarAula cMostrarAula;
+    private Stage anadirReserva;
+    private ControladorAnadirReserva cAnadirReserva;
+    private Stage listarReservas;
+    private ControladorListarReservas cListarReservas;
+    private Stage buscarReserva;
+    private ControladorBuscarReserva cBuscarReserva;
+    private Stage mostrarReserva;
+    private ControladorMostrarReserva cMostrarReserva;
     
 	@FXML
 	private void salir() {
@@ -119,6 +131,31 @@ public class ControladorVentanaPrincipal {
 		}
 	}
 	
+	@FXML
+	private void anadirReserva() throws IOException {
+		crearAnadirReserva();
+		anadirReserva.showAndWait();
+	}
+	
+	@FXML
+	private void listarReservas() throws IOException {
+		crearListarReservas();
+		listarReservas.showAndWait();
+	}
+	
+	@FXML
+	private void buscarReserva() throws IOException {
+		crearBuscarReserva();
+		buscarReserva.showAndWait();
+		Reserva reserva = cBuscarReserva.getReserva();
+		if (reserva != null) {
+			crearMostrarReserva(reserva);
+			mostrarReserva.showAndWait();
+		} else {
+			Dialogos.mostrarDialogoError("Reserva no encontrada", "No existe ninguna reserva para ese aula y esa permanencia");
+		}
+	}
+	
 	private void crearAnadirProfesor() throws IOException {
 		if (anadirProfesor == null) {
 			anadirProfesor = new Stage();
@@ -165,7 +202,7 @@ public class ControladorVentanaPrincipal {
 			cMostrarProfesor.setControladorMVC(controladorMVC);
 			cMostrarProfesor.setProfesor(profesor);
 			Scene escenaMostrarProfesor = new Scene(raizMostrarProfesor);
-			mostrarProfesor.setTitle("Listar Profesores");
+			mostrarProfesor.setTitle("Mostrar Profesor");
 			mostrarProfesor.initModality(Modality.APPLICATION_MODAL); 
 			mostrarProfesor.setScene(escenaMostrarProfesor);
 		} else {
@@ -219,11 +256,83 @@ public class ControladorVentanaPrincipal {
 			cMostrarAula.setControladorMVC(controladorMVC);
 			cMostrarAula.setAula(aula);
 			Scene escenaMostrarAula = new Scene(raizMostrarAula);
-			mostrarAula.setTitle("Listar Aulas");
+			mostrarAula.setTitle("Mostrar Aula");
 			mostrarAula.initModality(Modality.APPLICATION_MODAL); 
 			mostrarAula.setScene(escenaMostrarAula);
 		} else {
 			cMostrarAula.setAula(aula);
+		}
+	}
+	
+	private void crearAnadirReserva() throws IOException {
+		if (anadirReserva == null) {
+			anadirReserva = new Stage();
+			FXMLLoader cargadorAnadirReserva = new FXMLLoader(
+						getClass().getResource("../vistas/AnadirReserva.fxml"));
+			VBox raizAnadirReserva = cargadorAnadirReserva.load();
+			cAnadirReserva = cargadorAnadirReserva.getController();
+			cAnadirReserva.setControladorMVC(controladorMVC);
+			cAnadirReserva.inicializa();
+			Scene escenaAnadirAula = new Scene(raizAnadirReserva);
+			anadirReserva.setTitle("Añadir Reserva");
+			anadirReserva.initModality(Modality.APPLICATION_MODAL); 
+			anadirReserva.setScene(escenaAnadirAula);
+		} else {
+			cAnadirReserva.inicializa();
+		}
+	}
+	
+	private void crearListarReservas() throws IOException {
+		if (listarReservas == null) {
+			listarReservas = new Stage();
+			FXMLLoader cargadorListarReservas = new FXMLLoader(
+						getClass().getResource("../vistas/ListarReservas.fxml"));
+			VBox raizListarReservas = cargadorListarReservas.load();
+			cListarReservas = cargadorListarReservas.getController();
+			cListarReservas.setControladorMVC(controladorMVC);
+			cListarReservas.inicializa();
+			Scene escenaListarReservas = new Scene(raizListarReservas);
+			listarReservas.setTitle("Listar Reservas");
+			listarReservas.initModality(Modality.APPLICATION_MODAL); 
+			listarReservas.setScene(escenaListarReservas);
+		} else {
+			cListarReservas.inicializa();
+		}
+	}
+	
+	private void crearBuscarReserva() throws IOException {
+		if (buscarReserva == null) {
+			buscarReserva = new Stage();
+			FXMLLoader cargadorBuscarReserva = new FXMLLoader(
+						getClass().getResource("../vistas/BuscarReserva.fxml"));
+			VBox raizBuscarReserva = cargadorBuscarReserva.load();
+			cBuscarReserva = cargadorBuscarReserva.getController();
+			cBuscarReserva.setControladorMVC(controladorMVC);
+			cBuscarReserva.inicializa();
+			Scene escenaBuscarAula = new Scene(raizBuscarReserva);
+			buscarReserva.setTitle("Buscar Reserva");
+			buscarReserva.initModality(Modality.APPLICATION_MODAL); 
+			buscarReserva.setScene(escenaBuscarAula);
+		} else {
+			cBuscarReserva.inicializa();
+		}
+	}
+	
+	private void crearMostrarReserva(Reserva reserva) throws IOException {
+		if (mostrarReserva == null) {
+			mostrarReserva = new Stage();
+			FXMLLoader cargadorMostrarReserva = new FXMLLoader(
+						getClass().getResource("../vistas/MostrarReserva.fxml"));
+			VBox raizMostrarReserva = cargadorMostrarReserva.load();
+			cMostrarReserva = cargadorMostrarReserva.getController();
+			cMostrarReserva.setControladorMVC(controladorMVC);
+			cMostrarReserva.setReserva(reserva);
+			Scene escenaMostrarReserva = new Scene(raizMostrarReserva);
+			mostrarReserva.setTitle("Mostrar Reserva");
+			mostrarReserva.initModality(Modality.APPLICATION_MODAL); 
+			mostrarReserva.setScene(escenaMostrarReserva);
+		} else {
+			cMostrarReserva.setReserva(reserva);
 		}
 	}
 
