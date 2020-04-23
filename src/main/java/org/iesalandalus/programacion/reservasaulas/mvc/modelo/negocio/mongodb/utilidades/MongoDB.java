@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.bson.Document;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 
 import com.mongodb.MongoClientSettings;
@@ -26,6 +27,9 @@ public class MongoDB {
 	public static final String NOMBRE = "nombre";
 	public static final String CORREO = "correo";
 	public static final String TELEFONO = "telefono";
+	
+	public static final String AULA = "aula";
+	public static final String PUESTOS = "puestos";
 	
 	private static MongoClient conexion = null;
 	
@@ -79,6 +83,22 @@ public class MongoDB {
 			return null;
 		}
 		return new Profesor(documentoProfesor.getString(NOMBRE), documentoProfesor.getString(CORREO), documentoProfesor.getString(TELEFONO));
+	}
+	
+	public static Document obtenerDocumentoDesdeAula(Aula aula) {
+		if (aula == null) {
+			return null;
+		}
+		String nombre = aula.getNombre();
+		int puestos = aula.getPuestos();
+		return new Document().append(NOMBRE, nombre).append(PUESTOS, puestos);
+	}
+
+	public static Aula obtenerAulaDesdeDocumento(Document documentoAula) {
+		if (documentoAula == null) {
+			return null;
+		}
+		return new Aula(documentoAula.getString(NOMBRE), documentoAula.getInteger(PUESTOS));
 	}
 
 }

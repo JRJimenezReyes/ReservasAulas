@@ -1,6 +1,9 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.mongodb;
 
+import static com.mongodb.client.model.Filters.eq;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
@@ -30,26 +33,47 @@ public class Aulas implements IAulas {
 	
 	@Override
 	public List<Aula> get() {
-		return new ArrayList<>();
+		List<Aula> aulasOrdenadas = new ArrayList<>();
+		for (Document documentoAula : coleccionAulas.find()) {
+			aulasOrdenadas.add(MongoDB.obtenerAulaDesdeDocumento(documentoAula));
+		}
+		aulasOrdenadas.sort(Comparator.comparing(Aula::getNombre));
+		return aulasOrdenadas;
 	}
 	
 	@Override
 	public int getTamano() {
-		return 0;
+		return (int)coleccionAulas.countDocuments();
 	}
-	
 	
 	@Override
 	public void insertar(Aula aula) throws OperationNotSupportedException {
+		if (aula == null) {
+			throw new IllegalArgumentException("No se puede insertar un aula nula.");
+		}
+		if (buscar(aula) != null) {
+			throw new OperationNotSupportedException("El aula ya existe.");
+		} else {
+			coleccionAulas.insertOne(MongoDB.obtenerDocumentoDesdeAula(aula));
+		}
 	}
 	
 	@Override
 	public Aula buscar(Aula aula) {
-		return null;
+		Document documentoAula = coleccionAulas.find().filter(eq(MongoDB.NOMBRE, aula.getNombre())).first();
+		return MongoDB.obtenerAulaDesdeDocumento(documentoAula);
 	}
 	
 	@Override
 	public void borrar(Aula aula) throws OperationNotSupportedException {
+		if (aula == null) {
+			throw new IllegalArgumentException("No se puede borrar un aula nula.");
+		}
+		if (buscar(aula) != null) {
+			coleccionAulas.deleteOne(eq(MongoDB.NOMBRE, aula.getNombre()));
+		} else {
+			throw new OperationNotSupportedException("El aula a borrar no existe.");
+		} 
 	}
 
 }
