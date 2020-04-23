@@ -11,7 +11,7 @@ import org.iesalandalus.programacion.reservasaulas.mvc.vista.IVista;
 public class MainApp {
 
 	public static void main(String[] args) {
-		IModelo modelo = new Modelo(FactoriaFuenteDatos.FICHEROS.crear());
+		IModelo modelo = new Modelo(FactoriaFuenteDatos.MONGODB.crear());
 		IVista vista = procesarArgumentos(args);
 		IControlador controlador = new Controlador(modelo, vista);
 		controlador.comenzar();
