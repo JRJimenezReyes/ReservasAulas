@@ -138,8 +138,8 @@ public class ControladorRealizarReserva {
 			Reserva reserva = new Reserva(profesor, aula, permanencia);
 			controladorMVC.insertar(reserva);
 			padre.actualizaReservas();
-			padre.mostrarReservasAula(aula);
-			padre.mostrarReservasProfesor(profesor);
+			padre.actualizaAulas();
+			padre.actualizaProfesores();
 			Stage propietario = ((Stage) btAceptar.getScene().getWindow());
 			Dialogos.mostrarDialogoInformacion("Realizar Reserva", "Reserva realizada satisfactoriamente", propietario);
 		} catch (Exception e) {
