@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS Profesores;
 CREATE TABLE IF NOT EXISTS Profesores (
   idProfesor INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(45) NOT NULL,
-  correo VARCHAR(30) NOT NULL,
+  correo VARCHAR(45) NOT NULL,
   telefono VARCHAR(9) NULL,
   PRIMARY KEY (idProfesor),
   UNIQUE INDEX correoUnico (correo ASC) VISIBLE);
@@ -24,46 +24,21 @@ CREATE TABLE IF NOT EXISTS Aulas (
   PRIMARY KEY (idAula),
   UNIQUE INDEX nombreUnico (nombre ASC) VISIBLE);
 
-DROP TABLE IF EXISTS Permanencias;
-CREATE TABLE IF NOT EXISTS Permanencias (
-  idPermanencia INT NOT NULL AUTO_INCREMENT,
-  dia DATE NOT NULL,
-  tipo ENUM("TRAMO", "HORA") NOT NULL,
-  PRIMARY KEY (idPermanencia));
-
-DROP TABLE IF EXISTS PorTramos;
-CREATE TABLE IF NOT EXISTS PorTramos (
-  idPorTramo INT NOT NULL AUTO_INCREMENT,
-  tramo ENUM("MAÑANA", "TARDE") NOT NULL,
-  idPermanencia INT NOT NULL,
-  PRIMARY KEY (idPorTramo),
-  CONSTRAINT porTramosPermanencias
-    FOREIGN KEY (idPermanencia)
-    REFERENCES Permanencias (idPermanencia));
-
-DROP TABLE IF EXISTS PorHoras;
-CREATE TABLE IF NOT EXISTS PorHoras (
-  idPorHora INT NOT NULL AUTO_INCREMENT,
-  hora TIME NULL,
-  idPermanencia INT NOT NULL,
-  PRIMARY KEY (idPorHora),
-  CONSTRAINT porHorasPermanencias
-    FOREIGN KEY (idPermanencia)
-    REFERENCES Permanencias (idPermanencia));
-
 DROP TABLE IF EXISTS Reservas;
-CREATE TABLE IF NOT EXISTS Reservas (
-  idProfesor INT NOT NULL,
-  idAula INT NOT NULL,
-  idPermanencia INT NOT NULL,
-  PRIMARY KEY (idProfesor, idAula, idPermanencia),
-  CONSTRAINT profesoresReservas
-    FOREIGN KEY (idProfesor)
-    REFERENCES Profesores (idProfesor),
-  CONSTRAINT aulasReservas
-    FOREIGN KEY (idAula)
-    REFERENCES Aulas (idAula),
-  CONSTRAINT permanenciasReservas
-    FOREIGN KEY (idPermanencia)
-    REFERENCES Permanencias (idPermanencia));
+CREATE TABLE IF NOT EXISTS `Reservas` (
+  `idProfesor` INT NOT NULL,
+  `idAula` INT NOT NULL,
+  `dia` DATE NOT NULL,
+  `tipo` ENUM("TRAMO", "HORA") NOT NULL,
+  `tramo` ENUM("MANANA", "TARDE") NOT NULL,
+  `hora` TIME NOT NULL,
+  INDEX `fk_Profesores_has_Aulas_Aulas1_idx` (`idAula` ASC) VISIBLE,
+  INDEX `fk_Profesores_has_Aulas_Profesores1_idx` (`idProfesor` ASC) VISIBLE,
+  PRIMARY KEY (`idProfesor`, `idAula`, `dia`, `tipo`, `tramo`, `hora`),
+  CONSTRAINT `fk_Profesores_has_Aulas_Profesores1`
+    FOREIGN KEY (`idProfesor`)
+    REFERENCES `Profesores` (`idProfesor`),
+  CONSTRAINT `fk_Profesores_has_Aulas_Aulas1`
+    FOREIGN KEY (`idAula`)
+    REFERENCES `Aulas` (`idAula`));
 

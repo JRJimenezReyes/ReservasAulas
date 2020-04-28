@@ -148,6 +148,8 @@ public class ControladorVentanaPrincipal {
 			if (profesor != null && Dialogos.mostrarDialogoConfirmacion(BORRAR_PROFESOR, "¿Estás seguro de que quieres borrar el profesor?", null)) {
 				controladorMVC.borrar(profesor);
 				profesores.remove(profesor);
+				reservasProfesor.clear();
+				actualizaProfesores();
 				Dialogos.mostrarDialogoInformacion(BORRAR_PROFESOR, "Profesor borrado satisfactoriamente");
 			}
 		} catch (Exception e) {
@@ -168,7 +170,8 @@ public class ControladorVentanaPrincipal {
 			reserva = tvReservasProfesor.getSelectionModel().getSelectedItem();
 			if (reserva != null && Dialogos.mostrarDialogoConfirmacion(ANULAR_RESERVA, SEGURO_ANULAR_RESERVA, null)) {
 				controladorMVC.borrar(reserva);
-				mostrarReservasProfesor(reserva.getProfesor());
+				actualizaProfesores();
+				reservas.remove(reserva);
 				Dialogos.mostrarDialogoInformacion(ANULAR_RESERVA, RESERVA_ANULADA_OK);
 			}
 		} catch (Exception e) {
@@ -190,7 +193,8 @@ public class ControladorVentanaPrincipal {
 			if (aula != null && Dialogos.mostrarDialogoConfirmacion(BORRAR_AULA, "¿Estás seguro de que quieres borrar el aula?", null)) {
 				controladorMVC.borrar(aula);
 				aulas.remove(aula);
-				mostrarReservasProfesor(tvProfesores.getSelectionModel().getSelectedItem());
+				reservasAula.clear();
+				actualizaAulas();
 				Dialogos.mostrarDialogoInformacion(BORRAR_AULA, "Aula borrada satisfactoriamente");
 			}
 		} catch (Exception e) {
@@ -211,7 +215,8 @@ public class ControladorVentanaPrincipal {
 			reserva = tvReservasAula.getSelectionModel().getSelectedItem();
 			if (reserva != null && Dialogos.mostrarDialogoConfirmacion(ANULAR_RESERVA, SEGURO_ANULAR_RESERVA, null)) {
 				controladorMVC.borrar(reserva);
-				mostrarReservasAula(reserva.getAula());
+				reservas.remove(reserva);
+				actualizaAulas();
 				Dialogos.mostrarDialogoInformacion(ANULAR_RESERVA, RESERVA_ANULADA_OK);
 			}
 		} catch (Exception e) {
@@ -232,9 +237,9 @@ public class ControladorVentanaPrincipal {
 			reserva = tvReservas.getSelectionModel().getSelectedItem();
 			if (reserva != null && Dialogos.mostrarDialogoConfirmacion(ANULAR_RESERVA, SEGURO_ANULAR_RESERVA, null)) {
 				controladorMVC.borrar(reserva);
-				mostrarReservasAula(reserva.getAula());
-				mostrarReservasProfesor(reserva.getProfesor());
 				reservas.remove(reserva);
+				actualizaProfesores();
+				actualizaAulas();
 				Dialogos.mostrarDialogoInformacion(ANULAR_RESERVA, RESERVA_ANULADA_OK);
 			}
 		} catch (Exception e) {
@@ -243,10 +248,14 @@ public class ControladorVentanaPrincipal {
     }
     
     public void actualizaProfesores() {
+    	reservasAula.clear();
+    	tvAulas.getSelectionModel().clearSelection();
     	profesores.setAll(controladorMVC.getProfesores());
     }
     
     public void actualizaAulas() {
+    	reservasProfesor.clear();
+    	tvProfesores.getSelectionModel().clearSelection();
     	aulas.setAll(controladorMVC.getAulas());
     }
     
@@ -262,6 +271,7 @@ public class ControladorVentanaPrincipal {
 		} catch (IllegalArgumentException e) {
 			reservasProfesor.setAll(FXCollections.observableArrayList());
 		}
+    	actualizaReservas();
     }
     
     public void mostrarReservasAula(Aula aula) {
@@ -272,6 +282,7 @@ public class ControladorVentanaPrincipal {
 		} catch (IllegalArgumentException e) {
 			reservasAula.setAll(FXCollections.observableArrayList());
 		}
+    	actualizaReservas();
     }
     
 	private String getPermanenciaString(Reserva reserva) {
