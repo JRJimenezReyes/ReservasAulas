@@ -29,6 +29,9 @@ dependencies {
          
     // Uso de Mockito
     testCompile "org.mockito:mockito-inline:+"
+    
+    // Driver MySQL
+    implementation "mysql:mysql-connector-java:8.0.19"
 }
 
 //Añadido por mí
