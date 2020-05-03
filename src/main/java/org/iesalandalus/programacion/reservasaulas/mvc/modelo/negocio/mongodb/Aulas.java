@@ -3,7 +3,6 @@ package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.mongodb;
 import static com.mongodb.client.model.Filters.eq;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
@@ -33,12 +32,11 @@ public class Aulas implements IAulas {
 	
 	@Override
 	public List<Aula> get() {
-		List<Aula> aulasOrdenadas = new ArrayList<>();
-		for (Document documentoAula : coleccionAulas.find()) {
-			aulasOrdenadas.add(MongoDB.obtenerAulaDesdeDocumento(documentoAula));
+		List<Aula> aulas = new ArrayList<>();
+		for (Document documentoAula : coleccionAulas.find().sort(MongoDB.getCriterioOrdenacionAula())) {
+			aulas.add(MongoDB.getAula(documentoAula));
 		}
-		aulasOrdenadas.sort(Comparator.comparing(Aula::getNombre));
-		return aulasOrdenadas;
+		return aulas;
 	}
 	
 	@Override
@@ -54,14 +52,14 @@ public class Aulas implements IAulas {
 		if (buscar(aula) != null) {
 			throw new OperationNotSupportedException("El aula ya existe.");
 		} else {
-			coleccionAulas.insertOne(MongoDB.obtenerDocumentoDesdeAula(aula));
+			coleccionAulas.insertOne(MongoDB.getDocumento(aula));
 		}
 	}
 	
 	@Override
 	public Aula buscar(Aula aula) {
 		Document documentoAula = coleccionAulas.find().filter(eq(MongoDB.NOMBRE, aula.getNombre())).first();
-		return MongoDB.obtenerAulaDesdeDocumento(documentoAula);
+		return MongoDB.getAula(documentoAula);
 	}
 	
 	@Override

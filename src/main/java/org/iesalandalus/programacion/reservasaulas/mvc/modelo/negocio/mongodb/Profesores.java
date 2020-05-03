@@ -3,7 +3,6 @@ package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.mongodb;
 import static com.mongodb.client.model.Filters.eq;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
@@ -33,12 +32,11 @@ public class Profesores implements IProfesores {
 	
 	@Override
 	public List<Profesor> get() {
-		List<Profesor> profesoresOrdenados = new ArrayList<>();
-		for (Document documentoProfesor : colecccionProfesores.find()) {
-			profesoresOrdenados.add(MongoDB.obtenerProfesorDesdeDocumento(documentoProfesor));
+		List<Profesor> profesores = new ArrayList<>();
+		for (Document documentoProfesor : colecccionProfesores.find().sort(MongoDB.getCriterioOrdenacionProfesor())) {
+			profesores.add(MongoDB.getProfesor(documentoProfesor));
 		}
-		profesoresOrdenados.sort(Comparator.comparing(Profesor::getCorreo));
-		return profesoresOrdenados;
+		return profesores;
 	}
 	
 	@Override
@@ -54,14 +52,14 @@ public class Profesores implements IProfesores {
 		if (buscar(profesor) != null) {
 			throw new OperationNotSupportedException("El profesor ya existe.");
 		} else {
-			colecccionProfesores.insertOne(MongoDB.obtenerDocumentoDesdeProfesor(profesor));
+			colecccionProfesores.insertOne(MongoDB.getDocumento(profesor));
 		} 
 	}
 
 	@Override
 	public Profesor buscar(Profesor profesor) {
 		Document documentoProfesor = colecccionProfesores.find().filter(eq(MongoDB.CORREO, profesor.getCorreo())).first();
-		return MongoDB.obtenerProfesorDesdeDocumento(documentoProfesor);	}
+		return MongoDB.getProfesor(documentoProfesor);	}
 	
 	@Override
 	public void borrar(Profesor profesor) throws OperationNotSupportedException {

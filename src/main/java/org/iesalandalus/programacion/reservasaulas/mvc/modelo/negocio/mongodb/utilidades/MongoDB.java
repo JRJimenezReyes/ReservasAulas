@@ -25,10 +25,10 @@ import com.mongodb.client.MongoDatabase;
 
 public class MongoDB {
 	
-	public static final DateTimeFormatter FORMATO_DIA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	public static final DateTimeFormatter FORMATO_DIA = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	public static final DateTimeFormatter FORMATO_HORA = DateTimeFormatter.ofPattern("HH:mm");
 	
-	private static final String SERVIDOR = "35.198.132.204";
+	private static final String SERVIDOR = "35.246.226.125";
 	private static final int PUERTO = 27017;
 	private static final String BD = "reservasaulas";
 	private static final String USUARIO = "reservasaulas";
@@ -93,7 +93,7 @@ public class MongoDB {
 		}
 	}
 	
-	public static Document obtenerDocumentoDesdeProfesor(Profesor profesor) {
+	public static Document getDocumento(Profesor profesor) {
 		if (profesor == null) {
 			return null;
 		}
@@ -102,15 +102,19 @@ public class MongoDB {
 		String telefono = profesor.getTelefono();
 		return new Document().append(NOMBRE, nombre).append(CORREO, correo).append(TELEFONO, telefono);
 	}
+	
+	public static Document getCriterioOrdenacionProfesor() {
+		return new Document().append(CORREO, 1);
+	}
 
-	public static Profesor obtenerProfesorDesdeDocumento(Document documentoProfesor) {
+	public static Profesor getProfesor(Document documentoProfesor) {
 		if (documentoProfesor == null) {
 			return null;
 		}
 		return new Profesor(documentoProfesor.getString(NOMBRE), documentoProfesor.getString(CORREO), documentoProfesor.getString(TELEFONO));
 	}
 	
-	public static Document obtenerDocumentoDesdeAula(Aula aula) {
+	public static Document getDocumento(Aula aula) {
 		if (aula == null) {
 			return null;
 		}
@@ -118,15 +122,19 @@ public class MongoDB {
 		int puestos = aula.getPuestos();
 		return new Document().append(NOMBRE, nombre).append(PUESTOS, puestos);
 	}
+	
+	public static Document getCriterioOrdenacionAula() {
+		return new Document().append(NOMBRE, 1);
+	}
 
-	public static Aula obtenerAulaDesdeDocumento(Document documentoAula) {
+	public static Aula getAula(Document documentoAula) {
 		if (documentoAula == null) {
 			return null;
 		}
 		return new Aula(documentoAula.getString(NOMBRE), documentoAula.getInteger(PUESTOS));
 	}
 	
-	public static Document obtenerDocumentoDesdeReserva(Reserva reserva) {
+	public static Document getDocumento(Reserva reserva) {
 		if (reserva == null) {
 			return null;
 		}
@@ -134,8 +142,8 @@ public class MongoDB {
 		Aula aula = reserva.getAula();
 		Permanencia permanencia = reserva.getPermanencia();
 		String dia = permanencia.getDia().format(FORMATO_DIA);
-		Document dProfesor = obtenerDocumentoDesdeProfesor(profesor);
-		Document dAula = obtenerDocumentoDesdeAula(aula);
+		Document dProfesor = getDocumento(profesor);
+		Document dAula = getDocumento(aula);
 		Document dPermanencia = new Document().append(DIA, dia);
 		if (permanencia instanceof PermanenciaPorTramo) {
 			String tramo = ((PermanenciaPorTramo) permanencia).getTramo().name();
@@ -147,12 +155,12 @@ public class MongoDB {
 		return new Document().append(PROFESOR, dProfesor).append(AULA, dAula).append(PERMANENCIA, dPermanencia);
 	}
 	
-	public static Reserva obtenerReservaDesdeDocumento(Document documentoReserva) {
+	public static Reserva getReserva(Document documentoReserva) {
 		if (documentoReserva == null) {
 			return null;
 		}
-		Aula aula = new Aula(obtenerAulaDesdeDocumento((Document) documentoReserva.get(AULA)));
-		Profesor profesor = new Profesor(obtenerProfesorDesdeDocumento((Document) documentoReserva.get(PROFESOR)));
+		Aula aula = new Aula(getAula((Document) documentoReserva.get(AULA)));
+		Profesor profesor = new Profesor(getProfesor((Document) documentoReserva.get(PROFESOR)));
 		Document dPermanencia = (Document) documentoReserva.get(PERMANENCIA);
 		LocalDate dia = LocalDate.parse(dPermanencia.getString(DIA), FORMATO_DIA);
 		String tipoPermanencia = dPermanencia.getString(TIPO);

@@ -42,10 +42,15 @@ public class Reservas implements IReservas {
 	
 	@Override
 	public List<Reserva> get() {
-		List<Reserva> reservasOrdenadas = new ArrayList<>();
+		List<Reserva> reservas = new ArrayList<>();
 		for (Document documentoReserva : coleccionReservas.find()) {
-			reservasOrdenadas.add(MongoDB.obtenerReservaDesdeDocumento(documentoReserva));
+			reservas.add(MongoDB.getReserva(documentoReserva));
 		}
+		ordenarPorPermanencia(reservas);
+		return reservas;
+	}
+
+	private void ordenarPorPermanencia(List<Reserva> reservas) {
 		Comparator<Aula> comparadorAula = Comparator.comparing(Aula::getNombre);
 		Comparator<Permanencia> comparadorPermanencia = (Permanencia p1, Permanencia p2) -> {
 			int comparacion = -1;
@@ -60,55 +65,27 @@ public class Reservas implements IReservas {
 			}
 			return comparacion;
 		};
-		reservasOrdenadas.sort(Comparator.comparing(Reserva::getAula, comparadorAula).thenComparing(Reserva::getPermanencia, comparadorPermanencia));
-		return reservasOrdenadas;
+		reservas.sort(Comparator.comparing(Reserva::getAula, comparadorAula).thenComparing(Reserva::getPermanencia, comparadorPermanencia));
 	}
 	
 	@Override
 	public List<Reserva> get(Profesor profesor) {
-		List<Reserva> reservasOrdenadas = new ArrayList<>();
+		List<Reserva> reservasProfesor = new ArrayList<>();
 		for (Document documentoReserva : coleccionReservas.find().filter(eq(MongoDB.PROFESOR_CORREO, profesor.getCorreo()))) {
-			reservasOrdenadas.add(MongoDB.obtenerReservaDesdeDocumento(documentoReserva));
+			reservasProfesor.add(MongoDB.getReserva(documentoReserva));
 		}
-		Comparator<Aula> comparadorAula = Comparator.comparing(Aula::getNombre);
-		Comparator<Permanencia> comparadorPermanencia = (Permanencia p1, Permanencia p2) -> {
-			int comparacion = -1;
-			if (p1.getDia().equals(p2.getDia())) {
-				if (p1 instanceof PermanenciaPorTramo && p2 instanceof PermanenciaPorTramo) {
-					comparacion = Integer.compare(((PermanenciaPorTramo)p1).getTramo().ordinal(), ((PermanenciaPorTramo)p2).getTramo().ordinal());
-				} else if (p1 instanceof PermanenciaPorHora && p2 instanceof PermanenciaPorHora) {
-					comparacion = ((PermanenciaPorHora)p1).getHora().compareTo(((PermanenciaPorHora)p2).getHora());
-				}
-			} else {
-				comparacion = p1.getDia().compareTo(p2.getDia());
-			}
-			return comparacion;
-		};
-		reservasOrdenadas.sort(Comparator.comparing(Reserva::getAula, comparadorAula).thenComparing(Reserva::getPermanencia, comparadorPermanencia));
-		return reservasOrdenadas;
+		ordenarPorPermanencia(reservasProfesor);
+		return reservasProfesor;
 	}
 	
 	@Override
 	public List<Reserva> get(Aula aula) {
-		List<Reserva> reservasOrdenadas = new ArrayList<>();
+		List<Reserva> reservasAula = new ArrayList<>();
 		for (Document documentoReserva : coleccionReservas.find().filter(eq(MongoDB.AULA_NOMBRE, aula.getNombre()))) {
-			reservasOrdenadas.add(MongoDB.obtenerReservaDesdeDocumento(documentoReserva));
+			reservasAula.add(MongoDB.getReserva(documentoReserva));
 		}
-		Comparator<Permanencia> comparadorPermanencia = (Permanencia p1, Permanencia p2) -> {
-			int comparacion = -1;
-			if (p1.getDia().equals(p2.getDia())) {
-				if (p1 instanceof PermanenciaPorTramo && p2 instanceof PermanenciaPorTramo) {
-					comparacion = Integer.compare(((PermanenciaPorTramo)p1).getTramo().ordinal(), ((PermanenciaPorTramo)p2).getTramo().ordinal());
-				} else if (p1 instanceof PermanenciaPorHora && p2 instanceof PermanenciaPorHora) {
-					comparacion = ((PermanenciaPorHora)p1).getHora().compareTo(((PermanenciaPorHora)p2).getHora());
-				}
-			} else {
-				comparacion = p1.getDia().compareTo(p2.getDia());
-			}
-			return comparacion;
-		};
-		reservasOrdenadas.sort(Comparator.comparing(Reserva::getPermanencia, comparadorPermanencia));
-		return reservasOrdenadas;	
+		ordenarPorPermanencia(reservasAula);
+		return reservasAula;	
 	}
 	
 	@Override
@@ -141,7 +118,7 @@ public class Reservas implements IReservas {
 		if (buscar(reserva) != null) {
 			throw new OperationNotSupportedException("La reserva ya existe.");
 		} else {
-			coleccionReservas.insertOne(MongoDB.obtenerDocumentoDesdeReserva(reserva));
+			coleccionReservas.insertOne(MongoDB.getDocumento(reserva));
 		}
 	}
 	
@@ -206,7 +183,7 @@ public class Reservas implements IReservas {
 				filtroPermanencia
 			)).first();
 		
-		return MongoDB.obtenerReservaDesdeDocumento(documentoReserva);
+		return MongoDB.getReserva(documentoReserva);
 	}
 	
 	@Override
