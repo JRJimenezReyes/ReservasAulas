@@ -29,10 +29,14 @@ dependencies {
          
     // Uso de Mockito
     testCompile "org.mockito:mockito-inline:+"
+<<<<<<< HEAD
 
 	// MogoDB Driver
     compile 'org.mongodb:mongodb-driver-sync:4.0.2'
 
+=======
+    
+>>>>>>> refs/remotes/origin/MySQLXdevAPI
     // Driver MySQL
     implementation "mysql:mysql-connector-java:8.0.19"
 }

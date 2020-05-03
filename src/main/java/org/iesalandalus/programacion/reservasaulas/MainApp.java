@@ -41,6 +41,8 @@ public class MainApp {
 				fuenteDatos = FactoriaFuenteDatos.MONGODB.crear();
 			} else if (argumento.equalsIgnoreCase("-fdmysql")) {
 				fuenteDatos = FactoriaFuenteDatos.MYSQL.crear();
+			} else if (argumento.equalsIgnoreCase("-fdmysqlxdevapi")) {
+				fuenteDatos = FactoriaFuenteDatos.MYSQL_XDEVAPI.crear();
 			}
 		}
 		return fuenteDatos;

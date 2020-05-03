@@ -3,6 +3,7 @@ package org.iesalandalus.programacion.reservasaulas.mvc.modelo;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros.FactoriaFuenteDatosFicheros;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.mongodb.FactoriaFuenteDatosMongoDB;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.mysql.FactoriaFuenteDatosMySQL;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.mysqlxdevapi.FactoriaFuenteDatosMySQLXdevAPI;
 
 public enum FactoriaFuenteDatos {
 	
@@ -19,6 +20,11 @@ public enum FactoriaFuenteDatos {
 	MYSQL {
 		public IFuenteDatos crear() {
 			return new FactoriaFuenteDatosMySQL();
+		}
+	},
+	MYSQL_XDEVAPI {
+		public IFuenteDatos crear() {
+			return new FactoriaFuenteDatosMySQLXdevAPI();
 		}
 	};
 	
