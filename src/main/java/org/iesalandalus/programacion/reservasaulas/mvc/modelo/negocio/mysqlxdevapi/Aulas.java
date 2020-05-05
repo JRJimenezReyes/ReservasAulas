@@ -9,52 +9,45 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IAulas;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.mysqlxdevapi.utilidades.SesionBD;
 
-import com.mysql.cj.protocol.x.XProtocolError;
-import com.mysql.cj.xdevapi.Result;
-import com.mysql.cj.xdevapi.Row;
-import com.mysql.cj.xdevapi.RowResult;
-import com.mysql.cj.xdevapi.Table;
+import com.mysql.cj.exceptions.WrongArgumentException;
+import com.mysql.cj.xdevapi.Collection;
+import com.mysql.cj.xdevapi.DocResult;
 
 public class Aulas implements IAulas {
 	
-	private static final String TABLA_AULAS = "Aulas";
-	private static final String ID_AULA = "idAula";
+	private static final String COLECCION = "AulasX";
 	private static final String NOMBRE = "nombre";
-	private static final String PUESTOS = "puestos";
+	private static final String BUSQUEDA = "nombre = :nombre";
 	
-	private Table tablaAulas = null;
+	private Collection coleccionAulas = null;
 
 	@Override
 	public void comenzar() {
-		tablaAulas = SesionBD.getEsquema().getTable(TABLA_AULAS);
+		try {
+			coleccionAulas = SesionBD.getEsquema().getCollection(COLECCION, true);
+		} catch (WrongArgumentException e) {
+			SesionBD.getEsquema().createCollection(COLECCION);
+		}	
 	}
 
 	@Override
 	public void terminar() {
-		SesionBD.cierraSesion();
+		SesionBD.cerrarSesion();
 	}
 
 	@Override
 	public List<Aula> get() {
-		RowResult filas = tablaAulas.select("*").orderBy(NOMBRE).execute();
-		filas.fetchAll();
 		List<Aula> aulas = new ArrayList<>();
-		for (Row fila : filas) {
-			Aula aula = getAulaDesdeFila(fila);
-			aulas.add(aula);
+		DocResult documentos = coleccionAulas.find().orderBy(NOMBRE).execute();
+		while (documentos.hasNext()) {
+			aulas.add(SesionBD.getAula(documentos.next()));
 		}
 		return aulas;
 	}
 
-	private Aula getAulaDesdeFila(Row fila) {
-		String nombre = fila.getString(NOMBRE);
-		int puestos = fila.getInt(PUESTOS);
-		return new Aula(nombre, puestos);
-	}
-
 	@Override
 	public int getTamano() {
-		return (int)tablaAulas.count();
+		return (int)coleccionAulas.count();
 	}
 
 	@Override
@@ -62,24 +55,17 @@ public class Aulas implements IAulas {
 		if (aula == null) {
 			throw new NullPointerException("ERROR: No se puede insertar un aula nula.");
 		}
-		try {
-			tablaAulas.insert(ID_AULA, NOMBRE, PUESTOS).values(null, aula.getNombre(), aula.getPuestos()).execute();
-		} catch (XProtocolError e) {
+		if (buscar(aula) == null) {
+			coleccionAulas.add(SesionBD.getDocumento(aula)).execute();
+		} else {
 			throw new OperationNotSupportedException("ERROR: Ya existe un aula con ese nombre.");
 		}
 	}
 
 	@Override
 	public Aula buscar(Aula aula) {
-		if (aula == null) {
-			throw new IllegalArgumentException("ERROR: No se puede buscar un aula nula.");
-		}
-		RowResult filas = tablaAulas.select("*").where("nombre = :nombre").bind(NOMBRE, aula.getNombre()).execute();
-		Row fila = filas.fetchOne();
-		if (fila != null) {
-			aula = getAulaDesdeFila(fila);
-		}
-		return aula;
+		DocResult documentos = coleccionAulas.find(BUSQUEDA).bind(NOMBRE, aula.getNombre()).execute();
+		return documentos.hasNext() ? SesionBD.getAula(documentos.next()) : null;
 	}
 
 	@Override
@@ -87,12 +73,10 @@ public class Aulas implements IAulas {
 		if (aula == null) {
 			throw new IllegalArgumentException("ERROR: No se puede borrar un aula nula.");
 		}
-		try {
-			Result borradas = tablaAulas.delete().where("nombre = :nombre").bind(NOMBRE, aula.getNombre()).execute();
-			if (borradas.getAffectedItemsCount() == 0)
-				throw new OperationNotSupportedException("ERROR: No existe ningún aula con ese nombre.");
-		} catch (XProtocolError e) {
-			throw new OperationNotSupportedException("ERROR: " + e.getMessage());
+		if (buscar(aula) != null) {
+			coleccionAulas.remove(BUSQUEDA).bind(NOMBRE, aula.getNombre()).execute();
+		} else {
+			throw new OperationNotSupportedException("ERROR: No existe ningún aula con ese nombre.");
 		}
 	}
 

@@ -9,54 +9,45 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IProfesores;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.mysqlxdevapi.utilidades.SesionBD;
 
-import com.mysql.cj.protocol.x.XProtocolError;
-import com.mysql.cj.xdevapi.Result;
-import com.mysql.cj.xdevapi.Row;
-import com.mysql.cj.xdevapi.RowResult;
-import com.mysql.cj.xdevapi.Table;
+import com.mysql.cj.exceptions.WrongArgumentException;
+import com.mysql.cj.xdevapi.Collection;
+import com.mysql.cj.xdevapi.DocResult;
 
 public class Profesores implements IProfesores {
 	
-	private static final String TABLA_PROFESORES = "Profesores";
-	private static final String ID_PROFESOR = "idProfesor";
-	private static final String NOMBRE = "nombre";
+	private static final String COLECCION = "ProfesoresX";
 	private static final String CORREO = "correo";
-	private static final String TELEFONO = "telefono";
+	private static final String BUSQUEDA = "correo = :correo";
 	
-	private Table tablaProfesores = null;
+	private Collection coleccionProfesores = null;
 
 	@Override
 	public void comenzar() {
-		tablaProfesores = SesionBD.getEsquema().getTable(TABLA_PROFESORES);
+		try {
+			coleccionProfesores = SesionBD.getEsquema().getCollection(COLECCION, true);
+		} catch (WrongArgumentException e) {
+			SesionBD.getEsquema().createCollection(COLECCION);
+		}
 	}
 
 	@Override
 	public void terminar() {
-		SesionBD.cierraSesion();
+		SesionBD.cerrarSesion();
 	}
 
 	@Override
 	public List<Profesor> get() {
-		RowResult filas = tablaProfesores.select("*").orderBy(CORREO).execute();
-		filas.fetchAll();
 		List<Profesor> profesores = new ArrayList<>();
-		for (Row fila : filas) {
-			Profesor profesor = getProfesorDesdeFila(fila);
-			profesores.add(profesor);
+		DocResult documentos = coleccionProfesores.find().orderBy(CORREO).execute();
+		while (documentos.hasNext()) {
+			profesores.add(SesionBD.getProfesor(documentos.next()));
 		}
 		return profesores;
-	}
-	
-	private Profesor getProfesorDesdeFila(Row fila) {
-		String nombre = fila.getString(NOMBRE);
-		String correo = fila.getString(CORREO);
-		String telefono = fila.getString(TELEFONO);
-		return new Profesor(nombre, correo, telefono);
 	}
 
 	@Override
 	public int getTamano() {
-		return (int)tablaProfesores.count();
+		return (int)coleccionProfesores.count();
 	}
 
 	@Override
@@ -64,40 +55,28 @@ public class Profesores implements IProfesores {
 		if (profesor == null) {
 			throw new NullPointerException("ERROR: No se puede insertar un profesor nulo.");
 		}
-		try {
-			tablaProfesores.insert(ID_PROFESOR, NOMBRE, CORREO, TELEFONO)
-			.values(null, profesor.getNombre(), profesor.getCorreo(), profesor.getTelefono()).execute();
-		} catch (XProtocolError e) {
+		if (buscar(profesor) == null) {
+			coleccionProfesores.add(SesionBD.getDocumento(profesor)).execute();
+		} else {
 			throw new OperationNotSupportedException("ERROR: Ya existe un profesor con ese correo.");
 		}
 	}
 
 	@Override
 	public Profesor buscar(Profesor profesor) {
-		if (profesor == null) {
-			throw new IllegalArgumentException("ERROR: No se puede buscar un profesor nulo.");
-		}
-		RowResult filas = tablaProfesores.select("*")
-				.where("correo = :correo").bind(CORREO, profesor.getCorreo()).execute();
-		Row fila = filas.fetchOne();
-		if (fila != null) {
-			profesor = getProfesorDesdeFila(fila);
-		}
-		return profesor;
+		DocResult documentos = coleccionProfesores.find(BUSQUEDA).bind(CORREO, profesor.getCorreo()).execute();
+		return documentos.hasNext() ? SesionBD.getProfesor(documentos.next()) : null;
 	}
 
 	@Override
 	public void borrar(Profesor profesor) throws OperationNotSupportedException {
 		if (profesor == null) {
-			throw new IllegalArgumentException("ERROR: No se puede borrar un profesor nulo.");
+			throw new IllegalArgumentException("ERROR: No se puede borrar un aula nulo.");
 		}
-		try {
-			Result borrados = tablaProfesores.delete()
-					.where("correo = :correo").bind(CORREO, profesor.getCorreo()).execute();
-			if (borrados.getAffectedItemsCount() == 0)
-				throw new OperationNotSupportedException("ERROR: No existe ningún profesor con ese correo.");
-		} catch (XProtocolError e) {
-			throw new OperationNotSupportedException("ERROR: " + e.getMessage());
+		if (buscar(profesor) != null) {
+			coleccionProfesores.remove(BUSQUEDA).bind(CORREO, profesor.getCorreo()).execute();
+		} else {
+			throw new OperationNotSupportedException("ERROR: No existe ningún profesor con ese correo.");
 		}
 	}
 
