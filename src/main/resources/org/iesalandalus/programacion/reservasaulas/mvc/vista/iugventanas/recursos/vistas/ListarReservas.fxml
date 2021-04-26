@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="300.0" prefWidth="663.0" spacing="20.0" styleClass="vbox" stylesheets="@../estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.reservasaulas.mvc.vista.iugventanas.controladoresvistas.ControladorListarReservas">
+<VBox alignment="CENTER" prefHeight="300.0" prefWidth="663.0" spacing="20.0" styleClass="vbox" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.reservasaulas.mvc.vista.iugventanas.controladoresvistas.ControladorListarReservas">
    <children>
       <Label style="-fx-font-size: 25;" text="Reservas" />
       <TableView fx:id="tvReservas" prefHeight="359.0" prefWidth="611.0">

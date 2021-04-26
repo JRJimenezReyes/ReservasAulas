@@ -3,6 +3,7 @@ package org.iesalandalus.programacion.reservasaulas.mvc.vista.iugpestanas;
 import org.iesalandalus.programacion.reservasaulas.mvc.controlador.IControlador;
 import org.iesalandalus.programacion.reservasaulas.mvc.vista.IVista;
 import org.iesalandalus.programacion.reservasaulas.mvc.vista.iugpestanas.controladoresvistas.ControladorVentanaPrincipal;
+import org.iesalandalus.programacion.reservasaulas.mvc.vista.iugpestanas.recursos.LocalizadorRecursos;
 import org.iesalandalus.programacion.reservasaulas.mvc.vista.iugpestanas.utilidades.Dialogos;
 
 import javafx.application.Application;
@@ -34,7 +35,7 @@ public class VistaIUGPestanas extends Application implements IVista {
 	@Override
 	public void start(Stage escenarioPrincipal) {
 		try {
-			FXMLLoader cargadorVentanaPrincipal = new FXMLLoader(getClass().getResource("vistas/VentanaPrincipal.fxml"));
+			FXMLLoader cargadorVentanaPrincipal = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/VentanaPrincipal.fxml"));
 			VBox raiz = cargadorVentanaPrincipal.load();	
 			ControladorVentanaPrincipal cVentanaPrincipal = cargadorVentanaPrincipal.getController();
 			cVentanaPrincipal.setControladorMVC(controladorMVC);

@@ -10,6 +10,7 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Permanenci
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.PermanenciaPorTramo;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
+import org.iesalandalus.programacion.reservasaulas.mvc.vista.iugpestanas.recursos.LocalizadorRecursos;
 import org.iesalandalus.programacion.reservasaulas.mvc.vista.iugpestanas.utilidades.Dialogos;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -130,7 +131,7 @@ public class ControladorVentanaPrincipal {
 	
 	@FXML
 	private void acercaDe() throws IOException {
-		VBox contenido = FXMLLoader.load(getClass().getResource("../vistas/AcercaDe.fxml"));
+		VBox contenido = FXMLLoader.load(LocalizadorRecursos.class.getResource("vistas/AcercaDe.fxml"));
 		Dialogos.mostrarDialogoInformacionPersonalizado("Reservas Aulas", contenido);
 	}
 	
@@ -300,7 +301,7 @@ public class ControladorVentanaPrincipal {
 		if (anadirProfesor == null) {
 			anadirProfesor = new Stage();
 			FXMLLoader cargadorAnadirProfesor = new FXMLLoader(
-						getClass().getResource("../vistas/AnadirProfesor.fxml"));
+					LocalizadorRecursos.class.getResource("vistas/AnadirProfesor.fxml"));
 			VBox raizAnadirProfesor = cargadorAnadirProfesor.load();
 			cAnadirProfesor = cargadorAnadirProfesor.getController();
 			cAnadirProfesor.setControladorMVC(controladorMVC);
@@ -319,7 +320,7 @@ public class ControladorVentanaPrincipal {
 		if (realizarReservaProfesor == null) {
 			realizarReservaProfesor = new Stage();
 			FXMLLoader cargadorRealizarReservaProfesor = new FXMLLoader(
-						getClass().getResource("../vistas/RealizarReservaProfesor.fxml"));
+					LocalizadorRecursos.class.getResource("vistas/RealizarReservaProfesor.fxml"));
 			VBox raizRealizarReservaProfesor = cargadorRealizarReservaProfesor.load();
 			cRealizarReservaProfesor = cargadorRealizarReservaProfesor.getController();
 			cRealizarReservaProfesor.setControladorMVC(controladorMVC);
@@ -341,7 +342,7 @@ public class ControladorVentanaPrincipal {
 		if (anadirAula == null) {
 			anadirAula = new Stage();
 			FXMLLoader cargadorAnadirAula = new FXMLLoader(
-						getClass().getResource("../vistas/AnadirAula.fxml"));
+					LocalizadorRecursos.class.getResource("vistas/AnadirAula.fxml"));
 			VBox raizAnadirAula = cargadorAnadirAula.load();
 			cAnadirAula = cargadorAnadirAula.getController();
 			cAnadirAula.setControladorMVC(controladorMVC);
@@ -360,7 +361,7 @@ public class ControladorVentanaPrincipal {
 		if (realizarReservaAula == null) {
 			realizarReservaAula = new Stage();
 			FXMLLoader cargadorRealizarReservaAula = new FXMLLoader(
-						getClass().getResource("../vistas/RealizarReservaAula.fxml"));
+					LocalizadorRecursos.class.getResource("vistas/RealizarReservaAula.fxml"));
 			VBox raizRealizarReservaAula = cargadorRealizarReservaAula.load();
 			cRealizarReservaAula = cargadorRealizarReservaAula.getController();
 			cRealizarReservaAula.setControladorMVC(controladorMVC);
@@ -382,7 +383,7 @@ public class ControladorVentanaPrincipal {
 		if (realizarReserva == null) {
 			realizarReserva = new Stage();
 			FXMLLoader cargadorRealizarReserva = new FXMLLoader(
-						getClass().getResource("../vistas/RealizarReserva.fxml"));
+					LocalizadorRecursos.class.getResource("vistas/RealizarReserva.fxml"));
 			VBox raizRealizarReserva = cargadorRealizarReserva.load();
 			cRealizarReserva = cargadorRealizarReserva.getController();
 			cRealizarReserva.setControladorMVC(controladorMVC);

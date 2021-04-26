@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox prefHeight="137.0" prefWidth="292.0" stylesheets="@../estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="org.iesalandalus.programacion.reservasaulas.mvc.vista.iugpestanas.controladoresvistas.ControladorAnadirAula">
+<VBox prefHeight="137.0" prefWidth="292.0" stylesheets="@../estilos/estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="org.iesalandalus.programacion.reservasaulas.mvc.vista.iugpestanas.controladoresvistas.ControladorAnadirAula">
    <children>
       <GridPane hgap="10.0" vgap="10.0">
         <columnConstraints>

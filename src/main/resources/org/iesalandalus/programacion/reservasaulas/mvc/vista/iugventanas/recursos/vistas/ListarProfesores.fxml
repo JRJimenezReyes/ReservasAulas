@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox alignment="CENTER" prefHeight="296.0" prefWidth="500.0" spacing="20.0" styleClass="vbox" stylesheets="@../estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="org.iesalandalus.programacion.reservasaulas.mvc.vista.iugventanas.controladoresvistas.ControladorListarProfesores">
+<VBox alignment="CENTER" prefHeight="296.0" prefWidth="500.0" spacing="20.0" styleClass="vbox" stylesheets="@../estilos/estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="org.iesalandalus.programacion.reservasaulas.mvc.vista.iugventanas.controladoresvistas.ControladorListarProfesores">
    <children>
       <Label style="-fx-font-size: 25;" text="Profesores" />
       <TableView fx:id="tvProfesores" prefHeight="200.0" prefWidth="200.0">

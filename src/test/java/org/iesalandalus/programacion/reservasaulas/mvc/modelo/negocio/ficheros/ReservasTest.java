@@ -21,7 +21,6 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Tramo;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IReservas;
-import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros.Reservas;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

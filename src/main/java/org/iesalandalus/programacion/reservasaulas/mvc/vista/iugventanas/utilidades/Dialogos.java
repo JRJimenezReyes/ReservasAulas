@@ -2,6 +2,8 @@ package org.iesalandalus.programacion.reservasaulas.mvc.vista.iugventanas.utilid
 
 import java.util.Optional;
 
+import org.iesalandalus.programacion.reservasaulas.mvc.vista.iugventanas.recursos.LocalizadorRecursos;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -13,7 +15,7 @@ import javafx.stage.Stage;
 
 public class Dialogos {
 	
-	private static final String CSS = "../estilos.css";
+	private static final String CSS = "estilos/estilos.css";
 	private static final String ID_BT_ACEPTAR = "btAceptar";
 	private static final String ID_BT_CANCELAR = "btCancelar";
 	
@@ -23,7 +25,7 @@ public class Dialogos {
 	
 	public static void mostrarDialogoError(String titulo, String contenido, Stage propietario) {
 		Alert dialogo = new Alert(AlertType.ERROR);
-		dialogo.getDialogPane().getStylesheets().add(Dialogos.class.getResource(CSS).toExternalForm());
+		dialogo.getDialogPane().getStylesheets().add(LocalizadorRecursos.class.getResource(CSS).toExternalForm());
 		((Button) dialogo.getDialogPane().lookupButton(ButtonType.OK)).setId(ID_BT_ACEPTAR);
 		dialogo.setTitle(titulo);
 		dialogo.setHeaderText(null);
@@ -43,7 +45,7 @@ public class Dialogos {
 	
 	public static void mostrarDialogoInformacion(String titulo, String contenido, Stage propietario) {
 		Alert dialogo = new Alert(AlertType.INFORMATION);
-		dialogo.getDialogPane().getStylesheets().add(Dialogos.class.getResource(CSS).toExternalForm());
+		dialogo.getDialogPane().getStylesheets().add(LocalizadorRecursos.class.getResource(CSS).toExternalForm());
 		((Button) dialogo.getDialogPane().lookupButton(ButtonType.OK)).setId(ID_BT_ACEPTAR);
 		dialogo.setTitle(titulo);
 		dialogo.setHeaderText(null);
@@ -63,7 +65,7 @@ public class Dialogos {
 	
 	public static void mostrarDialogoInformacionPersonalizado(String titulo, Pane contenido, Stage propietario) {
 		Alert dialogo = new Alert(AlertType.INFORMATION);
-		dialogo.getDialogPane().getStylesheets().add(Dialogos.class.getResource(CSS).toExternalForm());
+		dialogo.getDialogPane().getStylesheets().add(LocalizadorRecursos.class.getResource(CSS).toExternalForm());
 		((Button) dialogo.getDialogPane().lookupButton(ButtonType.OK)).setId(ID_BT_ACEPTAR);
 		dialogo.setTitle(titulo);
 		dialogo.setHeaderText(null);
@@ -84,7 +86,7 @@ public class Dialogos {
 	
 	public static void mostrarDialogoAdvertencia(String titulo, String contenido, Stage propietario) {
 		Alert dialogo = new Alert(AlertType.WARNING);
-		dialogo.getDialogPane().getStylesheets().add(Dialogos.class.getResource(CSS).toExternalForm());
+		dialogo.getDialogPane().getStylesheets().add(LocalizadorRecursos.class.getResource(CSS).toExternalForm());
 		((Button) dialogo.getDialogPane().lookupButton(ButtonType.OK)).setId(ID_BT_ACEPTAR);
 		dialogo.setTitle(titulo);
 		dialogo.setHeaderText(null);
@@ -105,7 +107,7 @@ public class Dialogos {
 	public static String mostrarDialogoTexto(String titulo, String contenido) {
 		TextInputDialog dialogo = new TextInputDialog();
 		dialogo.setGraphic(null);
-		dialogo.getDialogPane().getStylesheets().add(Dialogos.class.getResource(CSS).toExternalForm());
+		dialogo.getDialogPane().getStylesheets().add(LocalizadorRecursos.class.getResource(CSS).toExternalForm());
 		((Button) dialogo.getDialogPane().lookupButton(ButtonType.OK)).setId(ID_BT_ACEPTAR);
 		((Button) dialogo.getDialogPane().lookupButton(ButtonType.CANCEL)).setId(ID_BT_CANCELAR);
 		dialogo.setTitle(titulo);
@@ -118,7 +120,7 @@ public class Dialogos {
 	
 	public static boolean mostrarDialogoConfirmacion(String titulo, String contenido, Stage propietario) {
 		Alert dialogo = new Alert(AlertType.CONFIRMATION);
-		dialogo.getDialogPane().getStylesheets().add(Dialogos.class.getResource(CSS).toExternalForm());
+		dialogo.getDialogPane().getStylesheets().add(LocalizadorRecursos.class.getResource(CSS).toExternalForm());
 		((Button) dialogo.getDialogPane().lookupButton(ButtonType.OK)).setId(ID_BT_ACEPTAR);
 		((Button) dialogo.getDialogPane().lookupButton(ButtonType.CANCEL)).setId(ID_BT_CANCELAR);
 		dialogo.setTitle(titulo);

@@ -13,7 +13,6 @@ import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IAulas;
-import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros.Aulas;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
